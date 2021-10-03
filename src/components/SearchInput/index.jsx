@@ -1,15 +1,15 @@
 import IconImg from 'components/IconImg'
-import { Container } from 'components/UI/common/Container'
+import { SearchInputContainer } from './style'
 import React from 'react'
 
 function SearchInput () {
   return (
-    <Container>
+    <SearchInputContainer>
       <IconImg
         img='img'
         alt='alt'
       />
-    </Container>
+    </SearchInputContainer>
   )
 }
 
