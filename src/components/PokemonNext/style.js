@@ -1,7 +1,7 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
 
-export const PokemonTypeContainer = styled.div`
+export const PokemonNextContainer = styled.div`
   ${cardConfig}
-  grid-area: type;
+  grid-area: next;
 `

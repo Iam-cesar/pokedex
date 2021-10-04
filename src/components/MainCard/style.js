@@ -1,5 +1,7 @@
+import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
 
-export const SearchInputContainer = styled.div`
-  grid-area: search;
+export const MainCardContainer = styled.div`
+  ${cardConfig}
+  grid-area: main;
 `

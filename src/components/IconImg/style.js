@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const SearchInputContainer = styled.div`
+export const IconImgContainer = styled.div`
   grid-area: search;
 `

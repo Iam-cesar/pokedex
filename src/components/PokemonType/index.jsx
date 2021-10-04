@@ -1,11 +1,11 @@
-import { Container } from 'components/UI/common/Container'
+import { PokemonTypeContainer } from './style'
 import React from 'react'
 
 function PokemonType () {
   return (
-    <Container>
+    <PokemonTypeContainer>
 
-    </Container>
+    </PokemonTypeContainer>
   )
 }
 

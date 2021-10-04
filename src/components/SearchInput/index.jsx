@@ -6,8 +6,13 @@ function SearchInput () {
   return (
     <SearchInputContainer>
       <IconImg
+        className='search__icon'
         img='img'
         alt='alt'
+      />
+      <input
+        type="text"
+        className='search__input'
       />
     </SearchInputContainer>
   )

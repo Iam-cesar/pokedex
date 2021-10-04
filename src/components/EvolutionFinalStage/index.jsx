@@ -1,11 +1,11 @@
-import { Container } from 'components/UI/common/Container'
+import { EvolutionFinalStageContainer } from './style'
 import React from 'react'
 
 function EvolutionFinalStage () {
   return (
-    <Container>
+    <EvolutionFinalStageContainer>
 
-    </Container>
+    </EvolutionFinalStageContainer>
   )
 }
 

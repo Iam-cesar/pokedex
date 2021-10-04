@@ -1,16 +1,23 @@
 import { createGlobalStyle } from 'styled-components'
 import {
-  $black,
   $white
 } from './colors'
 
 export const GlobalStyle = createGlobalStyle`
   *{
-    background-color: ${$black};
     box-sizing: border-box;
-    color: ${$white};
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
+  }
+  
+  html{
+    margin: 0 auto;
+    max-width: 1440px;
+  }
+  
+  body{
+    background-color: rgba(13,13,13, .85);
+    color: ${$white};
   }
 `

@@ -1,17 +1,20 @@
-import { Container } from 'components/UI/common/Container'
+import { TitleContainer } from './style'
 import React from 'react'
 import PropTypes from 'prop-types'
+
 Title.propTypes = {
-  HtmlSize: PropTypes.checkPropTypes(),
-  text: PropTypes.string
+  HtmlSize: PropTypes.string,
+  text: PropTypes.string,
+  style: PropTypes.object
 }
-function Title ({ HtmlSize, text }) {
+
+function Title ({ HtmlSize, text, style }) {
   return (
-    <Container>
+    <TitleContainer style={style} >
       <HtmlSize>
         {text}
       </HtmlSize>
-    </Container>
+    </TitleContainer>
   )
 }
 
