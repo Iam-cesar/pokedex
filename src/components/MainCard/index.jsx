@@ -1,10 +1,10 @@
-import { Container } from 'components/UI/common/Container'
+import { MainCardContainer } from './style'
 import React from 'react'
 
 function MainCard () {
   return (
-    <Container>
-    </Container>
+    <MainCardContainer>
+    </MainCardContainer>
   )
 }
 

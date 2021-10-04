@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const SearchInputContainer = styled.div`
-  grid-area: search;
+export const AsideNavigationContainer = styled.aside`
+  grid-area: aside;
 `

@@ -1,9 +1,10 @@
 import IconImg from 'components/IconImg'
 import React from 'react'
+import { AsideNavigationContainer } from './style'
 
 function AsideNavigation () {
   return (
-    <aside>
+    <AsideNavigationContainer>
       <nav>
         <IconImg
           img='img'
@@ -13,7 +14,7 @@ function AsideNavigation () {
           <li>home</li>
         </ul>
       </nav>
-    </aside>
+    </AsideNavigationContainer>
   )
 }
 
