@@ -21,17 +21,19 @@ function Home () {
       <MainCard />
       <PokemonInfo />
       <Title
-        style={{ gridArea: 'title__evolution' }}
         HtmlSize='h3'
+        className='title__evolution'
         text='Evoluções'
+        style={{ gridArea: 'title__evolution' }}
       />
       <EvolutionStageOne />
       <EvolutionStageTwo />
       <EvolutionFinalStage />
       <Title
-        style={{ gridArea: 'title__type' }}
         HtmlSize='h3'
+        className='title__type'
         text='Tipo'
+        style={{ gridArea: 'title__type' }}
       />
       <PokemonType />
       <PokemonPrevius />

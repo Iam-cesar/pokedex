@@ -1,8 +1,6 @@
 
-export function cardConfig () {
-  return `
+export const cardConfig = `
   background-color: rgba(242, 242, 242, .1);
   backdrop-filter: blur(1px);
-  border-radius: 15px; 
+  border-radius: 15px;
   `
-}

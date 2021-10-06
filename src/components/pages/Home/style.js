@@ -11,7 +11,7 @@ export const HomeContainer = styled.main`
                        "aside title__type title__type title__type info"
                        "aside type previus next info"
                        "aside footer footer footer info";
-  gap: 24px;
+  gap: 20px;
   height: 100vh;
   padding: 24px;
 `
