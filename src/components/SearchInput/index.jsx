@@ -1,13 +1,14 @@
 import IconImg from 'components/IconImg'
 import { SearchInputContainer } from './style'
 import React from 'react'
+import searchIcon from 'assets/svg/search_icon.svg'
 
 function SearchInput () {
   return (
     <SearchInputContainer>
       <IconImg
         className='search__icon'
-        img='img'
+        img={searchIcon}
         alt='alt'
       />
       <input

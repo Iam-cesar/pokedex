@@ -5,12 +5,15 @@ import PropTypes from 'prop-types'
 Title.propTypes = {
   HtmlSize: PropTypes.string,
   text: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  className: PropTypes.string
 }
 
-function Title ({ HtmlSize, text, style }) {
+function Title ({ HtmlSize, text, style, className }) {
   return (
-    <TitleContainer style={style} >
+    <TitleContainer
+      style={style}
+      className={className}>
       <HtmlSize>
         {text}
       </HtmlSize>
