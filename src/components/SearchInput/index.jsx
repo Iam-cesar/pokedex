@@ -7,14 +7,23 @@ import { PokemonContext } from 'context/pokemon'
 
 function SearchInput () {
   const { response, setResponse, searchText, setSearchText } = useContext(PokemonContext)
-
+  console.log(response)
   useEffect(() => {
     clearElement('search__input')
   }, [response])
 
-  function handleSearchText (e) {
+  useEffect(() => {
+    initialFetch()
+  }, [])
+
+  function initialFetch () {
+    const randomPokemonId = (Math.random() * 100).toFixed()
+    return handleFetchPokemon(randomPokemonId)
+  }
+
+  function handleSearchPokemon (e) {
     e.preventDefault()
-    handlePokemon(searchText)
+    handleFetchPokemon(searchText)
   }
 
   function clearElement (classElement) {
@@ -23,7 +32,7 @@ function SearchInput () {
     setSearchText('')
   }
 
-  function handlePokemon (param) {
+  function handleFetchPokemon (param) {
     const data = Api
       .fetchPokemon(param)
       .then(res => setResponse(res))
@@ -37,7 +46,7 @@ function SearchInput () {
         img={searchIcon}
         alt='alt'
       />
-      <form onSubmit={handleSearchText}>
+      <form onSubmit={handleSearchPokemon}>
         <input
           type="text"
           placeholder='Search...'
