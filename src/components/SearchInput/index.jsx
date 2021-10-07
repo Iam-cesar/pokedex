@@ -7,7 +7,6 @@ import { PokemonContext } from 'context/pokemon'
 
 function SearchInput () {
   const { response, setResponse, searchText, setSearchText } = useContext(PokemonContext)
-  console.log(response)
   useEffect(() => {
     clearElement('search__input')
   }, [response])
