@@ -1,5 +1,6 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
+import { $white } from 'components/UI/colors'
 
 export const SearchInputContainer = styled.div`
   ${cardConfig}
@@ -8,18 +9,20 @@ export const SearchInputContainer = styled.div`
   display: flex;
   grid-area: search;
   width: 30%;
-
+  
   .search__icon{
     display:grid;
     height: 100%;
     place-items: center;
     width: 50px;
   }
-
+  
   .search__input{
     background-color: transparent;
     border-radius: 15px;
     border: none;
+    color: ${$white};
+    font-size: 16px;
     height: 100%;
     width: 100%;
 

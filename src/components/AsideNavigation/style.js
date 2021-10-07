@@ -1,11 +1,14 @@
 import styled from 'styled-components'
-import { $primaryColor } from 'components/UI/colors'
+import { $primaryColor, $white } from 'components/UI/colors'
 
 export const AsideNavigationContainer = styled.aside`
   align-items: center;
+  border-right: 1px solid ${$white};
   display: flex;
   flex-direction: column;
   grid-area: aside;
+  height: 100vh;
+  padding: 24px 30px;
 
   nav{
     height: 60%;
@@ -24,6 +27,7 @@ export const AsideNavigationContainer = styled.aside`
     &:hover{
       background-color: ${$primaryColor};
       transition: 200ms ease-in-out;
+      cursor: pointer;
     }
   }
 `

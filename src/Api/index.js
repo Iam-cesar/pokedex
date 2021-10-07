@@ -1,8 +1,12 @@
 
 class Api {
-  constructor() {
-    this.URL = process.env.REACT_APP_BASE_URL
+  async fetchPokemon (param) {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${param}`)
+      .then(res => res.json())
+      .catch(err => console.log(err))
+
+    return response
   }
 }
 
-export default Api
+export default new Api()
