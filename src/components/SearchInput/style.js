@@ -17,7 +17,8 @@ export const SearchInputContainer = styled.div`
     width: 50px;
   }
   
-  .search__input{
+  .search__input,
+  form{
     background-color: transparent;
     border-radius: 15px;
     border: none;
