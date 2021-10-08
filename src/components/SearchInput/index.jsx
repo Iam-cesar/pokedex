@@ -9,6 +9,7 @@ function SearchInput () {
   const { response, setResponse, searchText, setSearchText } = useContext(PokemonContext)
   useEffect(() => {
     clearElement('search__input')
+    setSearchText('')
   }, [response])
 
   useEffect(() => {
@@ -28,7 +29,6 @@ function SearchInput () {
   function clearElement (classElement) {
     const element = document.querySelector(`.${classElement}`)
     element.value = ''
-    setSearchText('')
   }
 
   function handleFetchPokemon (param) {

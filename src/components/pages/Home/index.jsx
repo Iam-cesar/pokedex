@@ -2,9 +2,7 @@ import { HomeContainer } from './style'
 import React from 'react'
 import SearchInput from 'components/SearchInput'
 import MainCard from 'components/MainCard'
-import EvolutionStageOne from 'components/EvolutionStageOne'
-import EvolutionStageTwo from 'components/EvolutionStageTwo'
-import EvolutionFinalStage from 'components/EvolutionFinalStage'
+import Evolution from 'components/Evolution'
 import PokemonType from 'components/PokemonType'
 import PokemonPrevius from 'components/PokemonPrevius'
 import PokemonNext from 'components/PokemonNext'
@@ -16,7 +14,6 @@ import { PokemonProvider } from 'context/pokemon'
 function Home () {
   return (
     <PokemonProvider>
-
       <HomeContainer>
         <SearchInput />
         <MainCard />
@@ -27,9 +24,7 @@ function Home () {
           text='Evolutions'
           style={{ gridArea: 'title__evolution' }}
         />
-        <EvolutionStageOne />
-        <EvolutionStageTwo />
-        <EvolutionFinalStage />
+        <Evolution />
         <Title
           HtmlSize='h3'
           className='title__type'

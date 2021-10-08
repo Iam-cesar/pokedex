@@ -7,6 +7,14 @@ class Api {
 
     return response
   }
+
+  async fetchPokemonEvolutionChain (param) {
+    const response = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${param}`)
+      .then(res => res.json())
+      .catch(err => console.log(err))
+
+    return response
+  }
 }
 
 export default new Api()

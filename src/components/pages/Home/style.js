@@ -9,7 +9,7 @@ export const HomeContainer = styled.main`
                        "search search search search"
                        "main main main info"
                        "title__evolution title__evolution title__evolution info"
-                       "evolution__1 evolution__2 evolution__final info"
+                       "evolution evolution evolution info"
                        "title__type title__type title__type info"
                        "type previus next info"
                        "footer footer footer info"
