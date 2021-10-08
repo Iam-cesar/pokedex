@@ -20,7 +20,7 @@ export const MainCardContainer = styled.div`
     width: 50%;
 
     img{
-      height: 80%;
+      height: 70%;
     }
   }
 `

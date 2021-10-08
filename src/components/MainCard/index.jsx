@@ -1,10 +1,10 @@
 import { MainCardContainer } from './style'
-import React, { useContext } from 'react'
-import { PokemonContext } from 'context/pokemon'
+import React from 'react'
 import IconImg from 'components/IconImg'
+import { usePokemon } from 'hooks/usePokemon'
 
 function MainCard () {
-  const { response } = useContext(PokemonContext)
+  const { response } = usePokemon()
   function capitalize (string) {
     return `${string.charAt(0).toUpperCase()}${string.slice(1)}`
   }
