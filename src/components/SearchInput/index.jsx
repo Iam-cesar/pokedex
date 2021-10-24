@@ -29,8 +29,8 @@ function SearchInput () {
     return handleFetchPokemon(randomPokemonId)
   }
 
-  function handleSearchPokemon (e) {
-    e.preventDefault()
+  function handleSearchPokemon (event) {
+    event.preventDefault()
     handleFetchPokemon(searchText)
   }
 
@@ -42,9 +42,8 @@ function SearchInput () {
   function handleFetchPokemon (param) {
     const data = Api
       .fetchPokemon(param)
-      .then(res => {
-        res ? setResponse(res) : notify()
-      })
+      .then(res => setResponse(res))
+      .catch(() => notify())
     return data
   }
 
