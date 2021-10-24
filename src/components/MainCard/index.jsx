@@ -19,7 +19,7 @@ function MainCard () {
         className='main__card__img'
         img={response?.id <= animatedSpritesUntilToday
           ? response?.sprites.versions['generation-v']['black-white'].animated?.front_default
-          : response?.sprites?.front_default}
+          : response?.sprites?.front_default || ''}
         alt={response.name
           ? `Pokemon ${capitalize(response?.name)}`
           : ''}

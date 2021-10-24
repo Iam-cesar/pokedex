@@ -10,6 +10,12 @@ class Api {
       .then(res => res.json())
     return response
   }
+
+  async fetchPokemonSpecies (param) {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${param}`)
+      .then(res => res.json())
+    return response
+  }
 }
 
 export default new Api()

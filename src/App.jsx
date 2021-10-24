@@ -17,6 +17,6 @@ export default App
 
 const style = {
   display: 'grid',
-  gridTemplateColumns: 'auto 85%',
+  gridTemplateColumns: '100px 90%',
   gridTemplateAreas: '"aside home"'
 }
