@@ -4,9 +4,12 @@ import React, { useContext, useEffect } from 'react'
 import searchIcon from 'assets/svg/search_icon.svg'
 import Api from 'Api'
 import { PokemonContext } from 'context/pokemon'
+import toast, { Toaster } from 'react-hot-toast'
 
 function SearchInput () {
   const { response, setResponse, searchText, setSearchText } = useContext(PokemonContext)
+  const toastStyle = { color: '#EC1B23' }
+
   useEffect(() => {
     clearElement('search__input')
     setSearchText('')
@@ -15,6 +18,11 @@ function SearchInput () {
   useEffect(() => {
     initialFetch()
   }, [])
+
+  function notify () {
+    setSearchText('')
+    return toast('Pokemon não encontrado')
+  }
 
   function initialFetch () {
     const randomPokemonId = (Math.random() * 100).toFixed()
@@ -34,12 +42,15 @@ function SearchInput () {
   function handleFetchPokemon (param) {
     const data = Api
       .fetchPokemon(param)
-      .then(res => setResponse(res))
+      .then(res => {
+        res ? setResponse(res) : notify()
+      })
     return data
   }
 
   return (
     <SearchInputContainer>
+      <Toaster toastOptions={{ style: toastStyle }} />
       <IconImg
         className='search__icon'
         img={searchIcon}
