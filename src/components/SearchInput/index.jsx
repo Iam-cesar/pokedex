@@ -1,17 +1,20 @@
-import IconImg from 'components/IconImg'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import { SearchInputContainer } from './style'
-import React, { useContext, useEffect } from 'react'
+import { PokemonContext } from 'context/pokemon'
+import { $errorColor } from 'components/UI/colors'
+import toast, { Toaster } from 'react-hot-toast'
+import IconImg from 'components/IconImg'
 import searchIcon from 'assets/svg/search_icon.svg'
 import Api from 'Api'
-import { PokemonContext } from 'context/pokemon'
-import toast, { Toaster } from 'react-hot-toast'
 
 function SearchInput () {
-  const { response, setResponse, searchText, setSearchText } = useContext(PokemonContext)
-  const toastStyle = { color: '#EC1B23' }
+  const { response, setResponse } = useContext(PokemonContext)
+  const [searchText, setSearchText] = useState('')
+  const toastStyle = { color: `${$errorColor}` }
+  const searchInputRef = useRef('')
 
   useEffect(() => {
-    clearElement('search__input')
+    clearElement(searchInputRef)
     setSearchText('')
   }, [response])
 
@@ -34,9 +37,8 @@ function SearchInput () {
     handleFetchPokemon(searchText)
   }
 
-  function clearElement (classElement) {
-    const element = document.querySelector(`.${classElement}`)
-    element.value = ''
+  function clearElement (element) {
+    element.current = ''
   }
 
   function handleFetchPokemon (param) {
@@ -57,6 +59,7 @@ function SearchInput () {
       />
       <form onSubmit={handleSearchPokemon}>
         <input
+          ref={searchInputRef}
           type="text"
           placeholder='Search...'
           className='search__input'

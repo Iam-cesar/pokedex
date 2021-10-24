@@ -3,7 +3,8 @@ import styled from 'styled-components'
 export const HomeContainer = styled.main`
   display: grid;
   grid-area: home;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 17% 17% 17% auto;
+  /* grid-template-columns: 15% 15% 15% 30%; */
   grid-template-rows: .4% 5% 25% 2% 18% 2% 20% 8% .4%;
   grid-template-areas: ". . . ."
                        "search search search search"
@@ -15,5 +16,6 @@ export const HomeContainer = styled.main`
                        "footer footer footer info"
                        ". . . .";
   gap: 20px;
-  padding: 0 100px;
+  margin-left: 5rem;
+  max-width: 90%;
 `
