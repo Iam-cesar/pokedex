@@ -21,7 +21,7 @@ function SearchInput () {
 
   function notify () {
     setSearchText('')
-    return toast('Pokemon não encontrado')
+    toast('Pokemon não encontrado')
   }
 
   function initialFetch () {
