@@ -1,18 +1,13 @@
-
 class Api {
   async fetchPokemon (param) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${param}`)
       .then(res => res.json())
-      .catch(err => console.log(err))
-
     return response
   }
 
   async fetchPokemonEvolutionChain (param) {
     const response = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${param}`)
       .then(res => res.json())
-      .catch(err => console.log(err))
-
     return response
   }
 }
