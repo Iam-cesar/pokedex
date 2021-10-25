@@ -6,7 +6,7 @@ class Api {
   }
 
   async fetchPokemonEvolutionChain (param) {
-    const response = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${param}`)
+    const response = await fetch(param)
       .then(res => res.json())
     return response
   }
