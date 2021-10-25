@@ -1,6 +1,6 @@
 import React from 'react'
 import { GlobalStyle } from 'components/UI/GlobalStyle'
-import Home from 'components/pages/Home'
+import Home from 'pages/Home'
 import AsideNavigation from 'components/AsideNavigation'
 
 function App () {

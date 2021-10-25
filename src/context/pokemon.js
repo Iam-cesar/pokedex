@@ -11,7 +11,9 @@ export function PokemonProvider ({ children }) {
   const [searchText, setSearchText] = useState('')
   const [response, setResponse] = useState({})
   return (
-    <PokemonContext.Provider value={{ searchText, setSearchText, response, setResponse }}>
+    <PokemonContext.Provider
+      value={{ searchText, setSearchText, response, setResponse }}
+    >
       {children}
     </PokemonContext.Provider>
   )
