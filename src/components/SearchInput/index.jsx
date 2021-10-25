@@ -1,14 +1,21 @@
-import IconImg from 'components/IconImg'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import { SearchInputContainer } from './style'
-import React, { useContext, useEffect } from 'react'
+import { PokemonContext } from 'context/pokemon'
+import { $errorColor } from 'components/UI/colors'
+import toast, { Toaster } from 'react-hot-toast'
+import IconImg from 'components/IconImg'
 import searchIcon from 'assets/svg/search_icon.svg'
 import Api from 'Api'
-import { PokemonContext } from 'context/pokemon'
 
 function SearchInput () {
-  const { response, setResponse, searchText, setSearchText } = useContext(PokemonContext)
+  const { response, setResponse, setUrl } = useContext(PokemonContext)
+  const [searchText, setSearchText] = useState('')
+  const toastStyle = { color: `${$errorColor}` }
+  const searchInputRef = useRef('')
+
   useEffect(() => {
-    clearElement('search__input')
+    handleEvolutionChain(response.name)
+    clearElement(searchInputRef)
     setSearchText('')
   }, [response])
 
@@ -16,30 +23,43 @@ function SearchInput () {
     initialFetch()
   }, [])
 
-  function initialFetch () {
-    const randomPokemonId = (Math.random() * 100).toFixed()
-    return handleFetchPokemon(randomPokemonId)
+  function notify () {
+    setSearchText('')
+    toast('Pokemon não encontrado')
   }
 
-  function handleSearchPokemon (e) {
-    e.preventDefault()
+  function initialFetch () {
+    const randomPokemonId = (Math.random() * 100).toFixed()
+    handleFetchPokemon(randomPokemonId)
+  }
+
+  function handleSearchPokemon (event) {
+    event.preventDefault()
     handleFetchPokemon(searchText)
   }
 
-  function clearElement (classElement) {
-    const element = document.querySelector(`.${classElement}`)
-    element.value = ''
+  function clearElement (element) {
+    element.current = ''
   }
 
   function handleFetchPokemon (param) {
     const data = Api
       .fetchPokemon(param)
       .then(res => setResponse(res))
+      .catch(() => notify())
     return data
+  }
+
+  function handleEvolutionChain (name) {
+    if (name) {
+      Api.fetchPokemonSpecies(name)
+        .then(res => setUrl(res.evolution_chain.url))
+    }
   }
 
   return (
     <SearchInputContainer>
+      <Toaster toastOptions={{ style: toastStyle }} />
       <IconImg
         className='search__icon'
         img={searchIcon}
@@ -47,6 +67,7 @@ function SearchInput () {
       />
       <form onSubmit={handleSearchPokemon}>
         <input
+          ref={searchInputRef}
           type="text"
           placeholder='Search...'
           className='search__input'

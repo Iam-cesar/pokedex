@@ -7,9 +7,9 @@ export const MainCardContainer = styled.div`
   display: flex;
   grid-area: main;
 
-
   .main__card__title{
     display: flex;
+    flex-direction: column;
     padding: 4rem;
     width: 50%;
   }

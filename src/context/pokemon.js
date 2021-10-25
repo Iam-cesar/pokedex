@@ -8,12 +8,12 @@ PokemonProvider.propTypes = {
 }
 
 export function PokemonProvider ({ children }) {
-  const [searchText, setSearchText] = useState('')
   const [response, setResponse] = useState({})
+  const [url, setUrl] = useState('')
+  const [evolutionChain, setEvolutionChain] = useState([])
+
   return (
-    <PokemonContext.Provider
-      value={{ searchText, setSearchText, response, setResponse }}
-    >
+    <PokemonContext.Provider value={{ response, setResponse, url, setUrl, evolutionChain, setEvolutionChain }}>
       {children}
     </PokemonContext.Provider>
   )
