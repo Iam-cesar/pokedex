@@ -2,6 +2,7 @@ import { MainCardContainer } from './style'
 import React from 'react'
 import IconImg from 'components/IconImg'
 import { usePokemon } from 'hooks/usePokemon'
+import { stylingPokemonId } from 'components/UI/mixins'
 
 function MainCard () {
   const { response } = usePokemon()
@@ -11,19 +12,11 @@ function MainCard () {
     return `${string.charAt(0).toUpperCase()}${string.slice(1)}`
   }
 
-  function stylingPokemonId (number) {
-    return number < 10
-      ? `#00${response.id}`
-      : number < 100
-        ? `#0${response.id}`
-        : `#${response.id}`
-  }
-
   return (
     <MainCardContainer>
       <div className='main__card__title'>
         <h1>{capitalize(response?.name || '')}</h1>
-        <p>{stylingPokemonId(response.id)}</p>
+        <p>{stylingPokemonId(response)}</p>
       </div>
       <IconImg
         className='main__card__img'

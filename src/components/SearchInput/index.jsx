@@ -8,13 +8,12 @@ import searchIcon from 'assets/svg/search_icon.svg'
 import Api from 'Api'
 
 function SearchInput () {
-  const { response, setResponse, setUrl } = useContext(PokemonContext)
+  const { response, setResponse } = useContext(PokemonContext)
   const [searchText, setSearchText] = useState('')
   const toastStyle = { color: `${$errorColor}` }
   const searchInputRef = useRef('')
 
   useEffect(() => {
-    handleEvolutionChain(response.name)
     clearElement(searchInputRef)
     setSearchText('')
   }, [response])
@@ -43,18 +42,10 @@ function SearchInput () {
   }
 
   function handleFetchPokemon (param) {
-    const data = Api
-      .fetchPokemon(param)
+    const data = Api.fetchPokemon(param)
       .then(res => setResponse(res))
       .catch(() => notify())
     return data
-  }
-
-  function handleEvolutionChain (name) {
-    if (name) {
-      Api.fetchPokemonSpecies(name)
-        .then(res => setUrl(res.evolution_chain.url))
-    }
   }
 
   return (
