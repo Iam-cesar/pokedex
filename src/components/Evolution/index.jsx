@@ -4,6 +4,7 @@ import { EvolutionContainer } from './style'
 import Api from 'Api'
 
 function Evolution () {
+
   const { url, setEvolutionChain, response } = usePokemon()
   const [pokemonEvolutionNames, setPokemonEvolutionNames] = useState('')
   const [initialStage, setInitialStage] = useState()
@@ -36,6 +37,7 @@ function Evolution () {
         })
     }
   }
+
 
   function handleEvolutionChain (name, setPokemon) {
     if (name) {
