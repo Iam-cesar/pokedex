@@ -4,17 +4,26 @@ import { EvolutionContainer } from './style'
 import Api from 'Api'
 
 function Evolution () {
-  const { url, response } = usePokemon()
-  const [pokemonEvolutionNames, setPokemonEvolutionNames] = useState([])
-  const [evolutionChain, setEvolutionChain] = useState([])
 
-  useEffect(() => {
-    handleEvolutionChain()
-  }, [pokemonEvolutionNames])
+  const { url, setEvolutionChain, response } = usePokemon()
+  const [pokemonEvolutionNames, setPokemonEvolutionNames] = useState('')
+  const [initialStage, setInitialStage] = useState()
+  const [middleStage, setMiddleStage] = useState()
+  const [lastStage, setLastStage] = useState()
 
   useEffect(() => {
     handleEvolutionNames(url)
-  }, [url, response])
+  }, [response])
+
+  useEffect(() => {
+    handleEvolutionChain(pokemonEvolutionNames[0], setInitialStage)
+    handleEvolutionChain(pokemonEvolutionNames[1], setMiddleStage)
+    handleEvolutionChain(pokemonEvolutionNames[2], setLastStage)
+  }, [url])
+
+  useEffect(() => {
+    concatPokemonStages()
+  }, [url])
 
   function handleEvolutionNames (url) {
     if (url) {
@@ -29,35 +38,29 @@ function Evolution () {
     }
   }
 
-  function handleEvolutionChain () {
-    const array = []
-    pokemonEvolutionNames.forEach(async (item, index) => {
-      if (item) {
-        await Api.fetchPokemon(item)
-          .then(res => {
-            array.push({
-              name: pokemonEvolutionNames[index],
-              id: res.id,
-              image: res.sprites.front_default
-            })
+
+  function handleEvolutionChain (name, setPokemon) {
+    if (name) {
+      Api.fetchPokemon(name)
+        .then(res => {
+          setPokemon({
+            name: name,
+            id: res.id,
+            image: res.sprites.front_default
           })
-      }
-    })
-    setEvolutionChain(array)
+        })
+    }
+  }
+
+  function concatPokemonStages () {
+    const resArray = []
+    resArray.push(initialStage, middleStage, lastStage)
+    setEvolutionChain(resArray)
   }
 
   return (
     <EvolutionContainer>
-      {console.log(evolutionChain)}
-      {evolutionChain.map((item, index) => {
-        return (
-          <div key={index}>
-            <h4>{item.name}</h4>
-            <p>{item.id}</p>
-            <img src={item.image} alt='' />
-          </div>
-        )
-      })}
+      {console.log(pokemonEvolutionNames)}
     </EvolutionContainer>
   )
 }
