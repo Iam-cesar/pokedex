@@ -4,21 +4,17 @@ import { EvolutionContainer } from './style'
 import Api from 'Api'
 
 function Evolution () {
-  const { evolutionChain, setEvolutionChain, response, url } = usePokemon()
-  const [pokemonEvolutionNames, setPokemonEvolutionNames] = useState()
+  const { url, response } = usePokemon()
+  const [pokemonEvolutionNames, setPokemonEvolutionNames] = useState([])
+  const [evolutionChain, setEvolutionChain] = useState([])
 
   useEffect(() => {
-    handlePokemon(pokemonEvolutionNames)
-  }, [response])
+    handleEvolutionChain()
+  }, [pokemonEvolutionNames])
 
   useEffect(() => {
     handleEvolutionNames(url)
-  }, [url])
-
-  useEffect(() => {
-    handlePokemon(pokemonEvolutionNames)
-    handleEvolutionNames(url)
-  }, [])
+  }, [url, response])
 
   function handleEvolutionNames (url) {
     if (url) {
@@ -33,31 +29,32 @@ function Evolution () {
     }
   }
 
-  function handlePokemon (name) {
+  function handleEvolutionChain () {
     const array = []
-    if (name) {
-      name.forEach((item, index) => {
-        if (item) {
-          Api.fetchPokemon(item)
-            .then(res => {
-              array.push({
-                name: name[index],
-                id: res?.id,
-                image: res?.sprites?.front_default
-              })
+    pokemonEvolutionNames.forEach(async (item, index) => {
+      if (item) {
+        await Api.fetchPokemon(item)
+          .then(res => {
+            array.push({
+              name: pokemonEvolutionNames[index],
+              id: res.id,
+              image: res.sprites.front_default
             })
-        }
-      })
-    }
+          })
+      }
+    })
     setEvolutionChain(array)
   }
 
   return (
     <EvolutionContainer>
+      {console.log(evolutionChain)}
       {evolutionChain.map((item, index) => {
         return (
           <div key={index}>
             <h4>{item.name}</h4>
+            <p>{item.id}</p>
+            <img src={item.image} alt='' />
           </div>
         )
       })}
