@@ -17,6 +17,10 @@ function Evolution () {
 
   useEffect(() => {
     handleEvolutionNames(url)
+  }, [url])
+
+  useEffect(() => {
+    setInitialStage({})
     setMiddleStage({})
     setLastStage({})
   }, [url])
@@ -50,6 +54,7 @@ function Evolution () {
   }
 
   async function handleEvolution (name, setPokemon) {
+    console.log(name + '<---------- evolution')
     if (name) {
       const res = await Api.fetchPokemon(name)
       setPokemon({
@@ -70,7 +75,7 @@ function Evolution () {
     <EvolutionContainer>
       {evolutionChain.map((item, index) => {
         return (
-          item.image && item.name
+          item.image
             ? <div key={index} className='evolution__item'>
               <h4>{item.name}</h4>
               <p>{stylingPokemonId(item)}</p>
