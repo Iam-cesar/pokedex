@@ -54,7 +54,6 @@ function Evolution () {
   }
 
   async function handleEvolution (name, setPokemon) {
-    console.log(name + '<---------- evolution')
     if (name) {
       const res = await Api.fetchPokemon(name)
       setPokemon({
