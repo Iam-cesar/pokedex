@@ -18,19 +18,19 @@ function SearchInput () {
     setSearchText('')
   }, [response])
 
-  useEffect(() => {
-    initialFetch()
-  }, [])
+  // useEffect(() => {
+  //   initialFetch()
+  // }, [])
 
   function notify () {
     setSearchText('')
     toast('Pokemon não encontrado')
   }
 
-  function initialFetch () {
-    const randomPokemonId = (Math.random() * 100).toFixed()
-    handleFetchPokemon(randomPokemonId)
-  }
+  // function initialFetch () {
+  //   const randomPokemonId = (Math.random() * 100).toFixed()
+  //   handleFetchPokemon(randomPokemonId)
+  // }
 
   function handleSearchPokemon (event) {
     event.preventDefault()
