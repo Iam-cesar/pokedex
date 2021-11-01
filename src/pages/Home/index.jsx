@@ -7,7 +7,7 @@ import PokemonType from 'components/PokemonType'
 import PokemonPrevius from 'components/PokemonPrevius'
 import PokemonNext from 'components/PokemonNext'
 import Footer from 'components/Footer'
-import PokemonInfo from 'components/PokemonInfo'
+import PokemonInfo from 'components/PokemonList'
 import Title from 'components/Title'
 import { PokemonProvider } from 'context/pokemon'
 

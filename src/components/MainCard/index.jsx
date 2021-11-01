@@ -16,13 +16,13 @@ function MainCard () {
     <MainCardContainer>
       <div className='main__card__title'>
         <h1>{capitalize(response?.name || '')}</h1>
-        <p>{stylingPokemonId(response)}</p>
+        <p>{stylingPokemonId(response.id)}</p>
       </div>
       <IconImg
         className='main__card__img'
         img={response?.id <= animatedSpritesUntilToday
-          ? response?.sprites.versions['generation-v']['black-white'].animated?.front_default
-          : response?.sprites?.front_default || ''}
+          ? response?.imgAnimated
+          : response?.image || ''}
         alt={response.name
           ? `Pokemon ${capitalize(response?.name)}`
           : ''}
