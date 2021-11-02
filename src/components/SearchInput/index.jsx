@@ -24,46 +24,77 @@ function SearchInput () {
   }, [response])
 
   useEffect(() => {
-    handleEvolutions(response.urlEvolutionChain)
-  }, [response])
-
-  useEffect(() => {
     initialFetch()
   }, [])
-
-  function notify () {
-    setSearchText('')
-    toast('Pokemon não encontrado')
-  }
 
   async function handleEvolutionChain (name) {
     if (name) {
       const data = await Api.fetchPokemonSpecies(name)
       setResponse(Object.assign(response, { urlEvolutionChain: data.evolution_chain.url }))
+      await handleEvolutions(response.urlEvolutionChain)
+      handleEvolutionList()
+    }
+  }
+
+  async function handleFetchPokemon (param) {
+    try {
+      const data = await Api.fetchPokemon(param)
+      setResponse({
+        name: data.species?.name,
+        urlSpecie: data.species?.url,
+        id: data.id,
+        image: data.sprites?.front_default,
+        imgAnimated: data?.sprites.versions['generation-v']['black-white'].animated?.front_default,
+        type: data.types,
+        stats: data.stats,
+        abilities: data.abilities
+      })
+    } catch (err) {
+      notify()
     }
   }
 
   async function handleEvolutions (url) {
     if (url) {
       const data = await Api.fetchPokemonEvolutionChain(url)
-      console.log(data)
-      setResponse({
-        evolutions: {
-          initalStage: {
-            name: data.chain?.species.name || '',
-            url: data.chain?.species.url || ''
-          },
-          middleStage: {
-            name: data.chain?.evolves_to[0]?.species.name || '',
-            url: data.chain?.evolves_to[0]?.species.url || ''
-          },
-          lastStage: {
-            name: data.chain?.evolves_to[0]?.evolves_to[0]?.species.name || '',
-            url: data.chain?.evolves_to[0]?.evolves_to[0]?.species.url || ''
-          }
-        }
-      })
+      setResponse(Object.assign(response, {
+        evolutions: [{
+          name: data.chain?.species.name || '',
+          url: data.chain?.species.url || ''
+        },
+        {
+          name: data.chain?.evolves_to[0]?.species.name || '',
+          url: data.chain?.evolves_to[0]?.species.url || ''
+        },
+        {
+          name: data.chain?.evolves_to[0]?.evolves_to[0]?.species.name || '',
+          url: data.chain?.evolves_to[0]?.evolves_to[0]?.species.url || ''
+        }]
+      }))
     }
+  }
+
+  function handleEvolutionList () {
+    const array = []
+    response.evolutions.map(async (item) => {
+      if (item.name) {
+        const data = await Api.fetchPokemon(item.name)
+        array.push({
+          id: data.id,
+          image: data.sprites.front_default,
+          name: data.name,
+          type: data.types
+        })
+      }
+      setResponse(Object.assign(response, {
+        evolutionList: array
+      }))
+    })
+  }
+
+  function notify () {
+    setSearchText('')
+    toast('Pokemon não encontrado')
   }
 
   function initialFetch () {
@@ -81,21 +112,6 @@ function SearchInput () {
 
   function clearElement (element) {
     element.current = ''
-  }
-
-  async function handleFetchPokemon (param) {
-    try {
-      const data = await Api.fetchPokemon(param)
-      setResponse({
-        name: data.species?.name,
-        urlSpecie: data.species?.url,
-        id: data.id,
-        image: data.sprites?.front_default,
-        imgAnimated: data?.sprites.versions['generation-v']['black-white'].animated?.front_default
-      })
-    } catch (err) {
-      notify()
-    }
   }
 
   return (
