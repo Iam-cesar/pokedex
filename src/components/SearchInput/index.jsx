@@ -8,14 +8,23 @@ import searchIcon from 'assets/svg/search_icon.svg'
 import Api from 'Api'
 
 function SearchInput () {
-  const { response, setResponse } = useContext(PokemonContext)
+  const {
+    response,
+    setResponse
+  } = useContext(PokemonContext)
+
   const [searchText, setSearchText] = useState('')
   const toastStyle = { color: `${$errorColor}` }
   const searchInputRef = useRef('')
 
   useEffect(() => {
+    handleEvolutionChain(response.name)
     clearElement(searchInputRef)
     setSearchText('')
+  }, [response])
+
+  useEffect(() => {
+    handleEvolutions(response.urlEvolutionChain)
   }, [response])
 
   useEffect(() => {
@@ -27,6 +36,36 @@ function SearchInput () {
     toast('Pokemon não encontrado')
   }
 
+  async function handleEvolutionChain (name) {
+    if (name) {
+      const data = await Api.fetchPokemonSpecies(name)
+      setResponse(Object.assign(response, { urlEvolutionChain: data.evolution_chain.url }))
+    }
+  }
+
+  async function handleEvolutions (url) {
+    if (url) {
+      const data = await Api.fetchPokemonEvolutionChain(url)
+      console.log(data)
+      setResponse({
+        evolutions: {
+          initalStage: {
+            name: data.chain?.species.name || '',
+            url: data.chain?.species.url || ''
+          },
+          middleStage: {
+            name: data.chain?.evolves_to[0]?.species.name || '',
+            url: data.chain?.evolves_to[0]?.species.url || ''
+          },
+          lastStage: {
+            name: data.chain?.evolves_to[0]?.evolves_to[0]?.species.name || '',
+            url: data.chain?.evolves_to[0]?.evolves_to[0]?.species.url || ''
+          }
+        }
+      })
+    }
+  }
+
   function initialFetch () {
     const randomPokemonId = (Math.random() * 100).toFixed()
     handleFetchPokemon(randomPokemonId)
@@ -34,6 +73,9 @@ function SearchInput () {
 
   function handleSearchPokemon (event) {
     event.preventDefault()
+    if (!searchText) {
+      toast('Insira um nome para pesquisa')
+    }
     handleFetchPokemon(searchText)
   }
 
@@ -41,11 +83,19 @@ function SearchInput () {
     element.current = ''
   }
 
-  function handleFetchPokemon (param) {
-    const data = Api.fetchPokemon(param)
-      .then(res => setResponse(res))
-      .catch(() => notify())
-    return data
+  async function handleFetchPokemon (param) {
+    try {
+      const data = await Api.fetchPokemon(param)
+      setResponse({
+        name: data.species?.name,
+        urlSpecie: data.species?.url,
+        id: data.id,
+        image: data.sprites?.front_default,
+        imgAnimated: data?.sprites.versions['generation-v']['black-white'].animated?.front_default
+      })
+    } catch (err) {
+      notify()
+    }
   }
 
   return (
