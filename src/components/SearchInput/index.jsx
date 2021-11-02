@@ -50,7 +50,10 @@ function SearchInput () {
 
   return (
     <SearchInputContainer>
-      <Toaster toastOptions={{ style: toastStyle }} />
+      <Toaster
+        toastOptions={{ style: toastStyle }}
+        position={'top-center'}
+      />
       <IconImg
         className='search__icon'
         img={searchIcon}

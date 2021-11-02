@@ -8,8 +8,8 @@ export const EvolutionContainer = styled.div`
   flex-direction: row;
   justify-content: space-around;
   grid-area: evolution;
-
-
+  
+  
   .evolution__item{
     height: 100%;
     align-items: center;
@@ -26,8 +26,8 @@ export const EvolutionContainer = styled.div`
     }
 
     img{
-      width: 140px;
-      height: 140px;
+      width: 100%;
+      height: 65%;
     }
   }
 `
