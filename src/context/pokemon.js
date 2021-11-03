@@ -13,16 +13,23 @@ export function PokemonProvider ({ children }) {
     urlSpecie: '',
     id: '',
     image: '',
-    imgAnimated: '',
-    urlEvolutionChain: '',
-    evolutions: [],
-    evolutionList: []
+    imgAnimated: ''
   })
+
+  const [url, setUrl] = useState({})
+  const [evolutionNames, setEvolutionNames] = useState([])
+  const [evolution, setEvolution] = useState([])
 
   return (
     <PokemonContext.Provider value={{
       response,
-      setResponse
+      setResponse,
+      evolutionNames,
+      setEvolutionNames,
+      evolution,
+      setEvolution,
+      url,
+      setUrl
     }}>
       {children}
     </PokemonContext.Provider>
