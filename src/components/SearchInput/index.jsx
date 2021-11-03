@@ -10,12 +10,19 @@ import Api from 'Api'
 function SearchInput () {
   const {
     response,
-    setResponse
+    setResponse,
+    setEvolutionNames,
+    setUrl,
+    url
   } = useContext(PokemonContext)
 
   const [searchText, setSearchText] = useState('')
   const toastStyle = { color: `${$errorColor}` }
   const searchInputRef = useRef('')
+
+  useEffect(() => {
+    initialFetch()
+  }, [])
 
   useEffect(() => {
     handleEvolutionChain(response.name)
@@ -24,15 +31,15 @@ function SearchInput () {
   }, [response])
 
   useEffect(() => {
-    initialFetch()
-  }, [])
+    handleEvolutions(url.pokemon_chain)
+  }, [url])
 
   async function handleEvolutionChain (name) {
     if (name) {
-      const data = await Api.fetchPokemonSpecies(name)
-      setResponse(Object.assign(response, { urlEvolutionChain: data.evolution_chain.url }))
-      await handleEvolutions(response.urlEvolutionChain)
-      handleEvolutionList()
+      await Api.fetchPokemonSpecies(name)
+        .then(data => {
+          setUrl({ pokemon_chain: data.evolution_chain.url })
+        })
     }
   }
 
@@ -55,41 +62,27 @@ function SearchInput () {
   }
 
   async function handleEvolutions (url) {
-    if (url) {
-      const data = await Api.fetchPokemonEvolutionChain(url)
-      setResponse(Object.assign(response, {
-        evolutions: [{
-          name: data.chain?.species.name || '',
-          url: data.chain?.species.url || ''
-        },
-        {
-          name: data.chain?.evolves_to[0]?.species.name || '',
-          url: data.chain?.evolves_to[0]?.species.url || ''
-        },
-        {
-          name: data.chain?.evolves_to[0]?.evolves_to[0]?.species.name || '',
-          url: data.chain?.evolves_to[0]?.evolves_to[0]?.species.url || ''
-        }]
-      }))
-    }
-  }
-
-  function handleEvolutionList () {
-    const array = []
-    response.evolutions.map(async (item) => {
-      if (item.name) {
-        const data = await Api.fetchPokemon(item.name)
-        array.push({
-          id: data.id,
-          image: data.sprites.front_default,
-          name: data.name,
-          type: data.types
-        })
+    try {
+      if (url) {
+        const data = await Api.fetchPokemonEvolutionChain(url)
+        setEvolutionNames([
+          {
+            name: data.chain?.species.name || '',
+            url: data.chain?.species.url || ''
+          },
+          {
+            name: data.chain?.evolves_to[0]?.species.name || '',
+            url: data.chain?.evolves_to[0]?.species.url || ''
+          },
+          {
+            name: data.chain?.evolves_to[0]?.evolves_to[0]?.species.name || '',
+            url: data.chain?.evolves_to[0]?.evolves_to[0]?.species.url || ''
+          }
+        ])
       }
-      setResponse(Object.assign(response, {
-        evolutionList: array
-      }))
-    })
+    } catch (err) {
+      notify()
+    }
   }
 
   function notify () {

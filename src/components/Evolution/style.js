@@ -18,11 +18,11 @@ export const EvolutionContainer = styled.div`
     flex-direction: column;
 
     h4{
-      font-size: 1.4em;
+      font-size: 1.2em;
     }
 
     p{
-      font-size: 1.1em;
+      font-size: 1em;
     }
 
     img{
