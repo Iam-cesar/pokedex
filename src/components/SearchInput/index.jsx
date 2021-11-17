@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import IconImg from 'components/IconImg'
 import searchIcon from 'assets/svg/search_icon.svg'
 import Api from 'Api'
+import { usePokemonChainEvolution } from 'hooks/usePokemonChainEvolution'
 
 function SearchInput () {
   const {
@@ -65,20 +66,7 @@ function SearchInput () {
     try {
       if (url) {
         const data = await Api.fetchPokemonEvolutionChain(url)
-        setEvolutionNames([
-          {
-            name: data.chain?.species.name || '',
-            url: data.chain?.species.url || ''
-          },
-          {
-            name: data.chain?.evolves_to[0]?.species.name || '',
-            url: data.chain?.evolves_to[0]?.species.url || ''
-          },
-          {
-            name: data.chain?.evolves_to[0]?.evolves_to[0]?.species.name || '',
-            url: data.chain?.evolves_to[0]?.evolves_to[0]?.species.url || ''
-          }
-        ])
+        setEvolutionNames(usePokemonChainEvolution(data))
       }
     } catch (err) {
       notify()

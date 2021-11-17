@@ -1,48 +1,30 @@
 import { PokemonListContainer } from './style'
-import React, { } from 'react'
-// import { usePokemon } from 'hooks/usePokemon'
-// import { stylingPokemonId } from 'components/UI/mixins'
-// import Api from 'Api'
+import React, { useState, useEffect } from 'react'
+import Api from 'Api'
+import { usePokemonChainEvolution } from 'hooks/usePokemonChainEvolution'
 
 function PokemonList () {
-  // const { response, setPokemonList } = usePokemon()
+  const urlEvolution = 'https://pokeapi.co/api/v2/evolution-chain/'
+  const [pokemonList, setPokemonList] = useState([])
+  const listLength = 5
 
-  // useEffect(() => {
-  //   handlePokemonList()
-  // }, [response])
+  useEffect(() => {
+    handlePokemonList()
+  }, [])
 
-  // async function handlePokemonList () {
-  //   const array = []
-  //   const lenght = 5
-
-  //   try {
-  //     for (let i = response.id; i < response.id + lenght; i++) {
-  //       const data = await Api
-  //         .fetchPokemonEvolutionChain(`https://pokeapi.co/api/v2/evolution-chain/${i}/`)
-  //       array.push({
-  //         initalStage: {
-  //           name: data.chain?.species.name || '',
-  //           url: data.chain?.species.url || ''
-  //         },
-  //         middleStage: {
-  //           name: data.chain?.evolves_to[0]?.species.name || '',
-  //           url: data.chain?.evolves_to[0]?.species.url || ''
-  //         },
-  //         lastStage: {
-  //           name: data.chain?.evolves_to[0]?.evolves_to[0]?.species.name || '',
-  //           url: data.chain?.evolves_to[0]?.evolves_to[0]?.species.url || ''
-  //         }
-  //       })
-  //     }
-  //     setPokemonList(array)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+  async function handlePokemonList () {
+    const array = []
+    for (let i = 0; i < listLength; i++) {
+      const random = (Math.random() * 100).toFixed()
+      const res = await Api.fetchPokemonEvolutionChain(`${urlEvolution}${random}`)
+      array.push(usePokemonChainEvolution(res))
+    }
+    setPokemonList(array)
+  }
 
   return (
     <PokemonListContainer>
-
+      {console.log(pokemonList)}
     </PokemonListContainer>
   )
 }

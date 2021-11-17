@@ -18,9 +18,9 @@ function Evolution () {
   useEffect(() => {
     setPokemonLastEvolution([])
     setPokemonSecundEvolution([])
-    handleEvolutionList(evolutionNames[0]?.name, setPokemonEvolution)
-    handleEvolutionList(evolutionNames[1]?.name, setPokemonSecundEvolution)
-    handleEvolutionList(evolutionNames[2]?.name, setPokemonLastEvolution)
+    handleEvolutionList(evolutionNames?.evolutionInitial?.name, setPokemonEvolution)
+    handleEvolutionList(evolutionNames?.evolutionMiddle?.name, setPokemonSecundEvolution)
+    handleEvolutionList(evolutionNames?.evolutionFinal?.name, setPokemonLastEvolution)
   }, [evolutionNames])
 
   useEffect(() => {
