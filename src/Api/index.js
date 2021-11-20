@@ -1,7 +1,7 @@
 import axios from 'axios'
 class Api {
   async fetchPokemon (param) {
-    const pokemonInfo = await this.fetchPokemonInfo(param)
+    const pokemonInfo = await this.fetchPokemonInfo(this.removeSufixName(param))
     if (param) {
       const pokemonSpecies = await this.fetchPokemonSpecies(pokemonInfo.id)
       const pokemonEvolutionChain = await this.fetchPokemonEvolutionChain(pokemonSpecies.evolution_chain.url)
@@ -25,7 +25,7 @@ class Api {
       if (item) {
         const res = await this.fetchPokemonInfo(item)
         evolutions.push({
-          index: index,
+          index,
           name: res.name,
           id: res.id,
           image: res.sprites?.front_default
@@ -87,7 +87,7 @@ class Api {
   async fetchPokemonInfo (param) {
     try {
       if (param === '0') return
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${param}`)
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${this.addSufixOnName(param)}`)
       return response.data
     } catch (err) {
       console.log(err)
