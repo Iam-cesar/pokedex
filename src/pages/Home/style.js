@@ -4,7 +4,7 @@ export const HomeContainer = styled.main`
   display: grid;
   grid-area: home;
   grid-template-columns: 17% 17% 17% auto;
-  grid-template-rows: .4% 5% 25% 2% 23% 2% 15% 8% .4%;
+  grid-template-rows: 0 5% 23% 2% 23% 2% 16% 8% 0;
   grid-template-areas: ". . . ."
                        "search search search search"
                        "main main main list"

@@ -1,5 +1,21 @@
 import axios from 'axios'
 class Api {
+  async getUrlEvolutionChains () {
+    const url = 'https://pokeapi.co/api/v2/evolution-chain/?offset=0&limit=30'
+    const response = await axios.get(url)
+    return response.data.results
+  }
+
+  async getPokemonList () {
+    const list = await this.getUrlEvolutionChains()
+    const response = []
+    await Promise.all(list.map(async (item) => {
+      const res = await this.fetchPokemonEvolutionChain(item.url)
+      response.push(res.chain?.species.name)
+    }))
+    return response
+  }
+
   async fetchPokemon (param) {
     const pokemonInfo = await this.fetchPokemonInfo(param)
     if (param) {
@@ -61,7 +77,8 @@ class Api {
       aria: ['meloetta'],
       baile: ['oricorio'],
       red: ['minior'],
-      altered: ['giratina']
+      altered: ['giratina'],
+      striped: ['basculin']
     }
 
     if (specialPokemons.incarnate.includes(param)) { param = param + '-incarnate' }
@@ -70,6 +87,7 @@ class Api {
     if (specialPokemons.baile.includes(param)) { param = param + '-baile' }
     if (specialPokemons.red.includes(param)) { param = param + '-red' }
     if (specialPokemons.altered.includes(param)) { param = param + '-altered' }
+    if (specialPokemons.striped.includes(param)) { param = param + '-red-striped' }
     return param
   }
 
@@ -81,13 +99,14 @@ class Api {
     if (param.includes('red')) { param = param.replace('-red', '') }
     if (param.includes('meteor')) { param = param.replace('-meteor', '') }
     if (param.includes('altered')) { param = param.replace('-altered', '') }
+    if (param.includes('striped')) { param = param.replace('-striped', '') }
     return param
   }
 
   async fetchPokemonInfo (param) {
     try {
       if (param === '0') return
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${param}`)
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${this.addSufixOnName(param)}`)
       return response.data
     } catch (err) {
       console.log(err)
