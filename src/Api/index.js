@@ -1,5 +1,21 @@
 import axios from 'axios'
 class Api {
+  async getUrlEvolutionChains () {
+    const url = 'https://pokeapi.co/api/v2/evolution-chain/?offset=0&limit=30'
+    const response = await axios.get(url)
+    return response.data.results
+  }
+
+  async getPokemonList () {
+    const list = await this.getUrlEvolutionChains()
+    const response = []
+    await Promise.all(list.map(async (item) => {
+      const res = await this.fetchPokemonEvolutionChain(item.url)
+      response.push(res.chain?.species.name)
+    }))
+    return response
+  }
+
   async fetchPokemon (param) {
     const pokemonInfo = await this.fetchPokemonInfo(param)
     if (param) {
