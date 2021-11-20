@@ -14,7 +14,7 @@ export const PokemonListContainer = styled.div`
   .pokemon-list{
     align-items: center;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
 
     h5{
       font-size: 1.5rem;
