@@ -11,13 +11,21 @@ export const PokemonListContainer = styled.div`
   padding: 2em 0;
   max-height: 90vh;
 
+
+
   .pokemon-list{
     align-items: center;
     display: flex;
     flex-direction: column;
 
-    h5{
-      font-size: 1.5rem;
+    :hover{
+    cursor: pointer;
+    transform: scale(1.3);
+  }
+
+    p{
+      font-size: 0.8rem;
+      text-align: center;
     }
   }
 `

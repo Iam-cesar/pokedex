@@ -15,7 +15,8 @@ function Evolution () {
     <EvolutionContainer>
       {evolutions.map((item) => {
         return (
-          <div key={item.index} className='evolution__item'>
+          item
+            ? <div key={item.index} className='evolution__item'>
             <h4>{item.name}</h4>
             <p>{stylingPokemonId(item.id)}</p>
             <img
@@ -23,6 +24,7 @@ function Evolution () {
               alt={`Pokemon ${item.name}`}
             />
           </div>
+            : ''
         )
       })}
     </EvolutionContainer>

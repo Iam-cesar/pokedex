@@ -41,14 +41,15 @@ class Api {
       if (item) {
         const res = await this.fetchPokemonInfo(item)
         evolutions.push({
-          index: index,
+          index,
           name: res.name,
           id: res.id,
           image: res.sprites?.front_default
         })
       }
     }))
-    return evolutions
+
+    return evolutions.sort((a, b) => (a.index > b.index) ? 1 : -1)
   }
 
   async getPokemonFullInfo (param) {

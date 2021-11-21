@@ -1,10 +1,12 @@
 import { PokemonListContainer } from './style'
 import React, { useEffect, useState } from 'react'
 import Api from 'Api'
-import { stylingPokemonId } from 'components/UI/mixins'
+import { usePokemon } from 'hooks/usePokemon'
 
 function PokemonList () {
+  const { setResponse } = usePokemon()
   const [pokemonList, setPokemonList] = useState([])
+
   useEffect(() => {
     handlePokemonsList()
   }, [])
@@ -23,10 +25,15 @@ function PokemonList () {
     <PokemonListContainer>
       {pokemonList.map((item, index) => {
         return (
-          <div key={index} className='pokemon-list'>
-            <img src={item.image} alt={item.name} />
-            <span>{stylingPokemonId(item.id)}</span>
+        <a
+          key={index}
+          onClick={() => setResponse(pokemonList[index])}
+        >
+          <div className='pokemon-list'>
+              <img src={item.image} alt={item.name} />
+              <p>{item.name}</p>
           </div>
+        </a>
         )
       })}
     </PokemonListContainer>
