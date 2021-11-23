@@ -8,7 +8,6 @@ export const PokemonListContainer = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 2em 0;
   max-height: 90vh;
 
 
