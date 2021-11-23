@@ -42,13 +42,18 @@ class Api {
         const res = await this.fetchPokemonInfo(item)
         evolutions.push({
           index,
-          name: res.name,
+          name: res.species?.name,
+          urlSpecie: res.species?.url,
           id: res.id,
-          image: res.sprites?.front_default
+          image: res.sprites?.front_default,
+          imgAnimated: res?.sprites.versions['generation-v']['black-white'].animated?.front_default,
+          type: res.types,
+          stats: res.stats,
+          abilities: res.abilities,
+          weight: res.weight
         })
       }
     }))
-
     return evolutions.sort((a, b) => (a.index > b.index) ? 1 : -1)
   }
 

@@ -16,5 +16,5 @@ export const HomeContainer = styled.main`
                        ". . . .";
   gap: 20px;
   margin-left: 5rem;
-  max-width: 90%;
+  max-width: 88%;
 `

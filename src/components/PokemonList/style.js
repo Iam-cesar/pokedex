@@ -8,10 +8,8 @@ export const PokemonListContainer = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 2em 0;
+  padding: 0 0 1em 0;
   max-height: 90vh;
-
-
 
   .pokemon-list{
     align-items: center;
@@ -24,7 +22,7 @@ export const PokemonListContainer = styled.div`
   }
 
     p{
-      font-size: 0.8rem;
+      font-size: 1rem;
       text-align: center;
     }
   }
