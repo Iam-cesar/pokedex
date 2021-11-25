@@ -28,7 +28,7 @@ function Home () {
         <Title
           HtmlSize='h3'
           className='title__type'
-          text='Type'
+          text='Type and information'
           style={{ gridArea: 'title__type' }}
         />
         <PokemonType />
