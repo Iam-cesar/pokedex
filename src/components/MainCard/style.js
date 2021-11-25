@@ -7,11 +7,15 @@ export const MainCardContainer = styled.div`
   display: flex;
   grid-area: main;
 
-  .main__card__title{
+  .main__card{
     display: flex;
     flex-direction: column;
     padding: 4rem;
     width: 50%;
+
+    h1{
+      font-size: 2.5rem;
+    }
   }
 
   .main__card__img{

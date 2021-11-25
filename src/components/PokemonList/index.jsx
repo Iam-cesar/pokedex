@@ -25,15 +25,15 @@ function PokemonList () {
     <PokemonListContainer>
       {pokemonList.map((item, index) => {
         return (
-        <a
-          key={index}
-          onClick={() => setResponse(pokemonList[index])}
-        >
-          <div className='pokemon-list'>
+          <a
+            key={index}
+            onClick={() => setResponse(pokemonList[index])}
+          >
+            <div className='pokemon-list'>
               <img src={item.image} alt={item.name} />
               <p>{item.name}</p>
-          </div>
-        </a>
+            </div>
+          </a>
         )
       })}
     </PokemonListContainer>

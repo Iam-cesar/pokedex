@@ -14,7 +14,7 @@ function MainCard () {
 
   return (
     <MainCardContainer>
-      <div className='main__card__title'>
+      <div className='main__card'>
         <h1>{capitalize(response?.name || '')}</h1>
         <p>{stylingPokemonId(response.id)}</p>
       </div>

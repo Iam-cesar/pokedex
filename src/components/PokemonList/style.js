@@ -17,13 +17,13 @@ export const PokemonListContainer = styled.div`
     flex-direction: column;
 
     :hover{
-    cursor: pointer;
-    transform: scale(1.3);
+      cursor: pointer;
+      transform: scale(1.2);
+    }
   }
 
-    p{
-      font-size: 1rem;
-      text-align: center;
-    }
+  .pokemon-list p{
+    font-size: 1.1rem;
+    text-align: center;
   }
 `
