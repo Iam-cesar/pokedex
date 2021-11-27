@@ -4,7 +4,6 @@ import styled from 'styled-components'
 export const PokemonTypeContainer = styled.div`
   ${cardConfig}
   align-items: center;
-  background-color: transparent;
   display: flex;
   grid-area: type;
 
@@ -28,7 +27,7 @@ export const PokemonTypeContainer = styled.div`
       }
       
       p{
-        font-size: 1.5em;
+        font-size: 1.3em;
       }
     }
   }

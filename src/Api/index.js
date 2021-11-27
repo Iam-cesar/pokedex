@@ -18,7 +18,7 @@ class Api {
       const res = await this.getPokemonEvolutionChain(item.url)
       response.push(res.chain?.species.name)
     }))
-    return response
+    return container
   }
 
   async getPokemon (param) {
@@ -41,7 +41,7 @@ class Api {
 
   async getPokemonEvolutions (param) {
     const evolutionNames = await this.getPokemonEvolutionNames(param)
-    const evolutions = []
+    const container = []
     await Promise.all(evolutionNames.map(async (item, index) => {
       if (item) {
         const res = await this.getPokemonInfo(item)
@@ -59,7 +59,7 @@ class Api {
         })
       }
     }))
-    return evolutions.sort((a, b) => (a.index > b.index) ? 1 : -1)
+    return container.sort((a, b) => (a.index > b.index) ? 1 : -1)
   }
 
   async getPokemonFullInfo (param) {
@@ -89,7 +89,8 @@ class Api {
       baile: ['oricorio'],
       red: ['minior'],
       altered: ['giratina'],
-      striped: ['basculin']
+      striped: ['basculin'],
+      average: ['gourgeist', 'pumpkaboo']
     }
 
     if (specialPokemons.incarnate.includes(param)) { param = param + '-incarnate' }
@@ -99,6 +100,7 @@ class Api {
     if (specialPokemons.red.includes(param)) { param = param + '-red' }
     if (specialPokemons.altered.includes(param)) { param = param + '-altered' }
     if (specialPokemons.striped.includes(param)) { param = param + '-red-striped' }
+    if (specialPokemons.average.includes(param)) { param = param + '-average' }
     return param
   }
 
@@ -111,9 +113,9 @@ class Api {
     if (param.includes('meteor')) { param = param.replace('-meteor', '') }
     if (param.includes('altered')) { param = param.replace('-altered', '') }
     if (param.includes('striped')) { param = param.replace('-striped', '') }
+    if (param.includes('average')) { param = param.replace('-average', '') }
     return param
   }
-
   async getPokemonInfo (param) {
     try {
       if (param === '0') return

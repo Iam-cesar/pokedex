@@ -31,24 +31,24 @@ function PokemonType () {
 
   function handleTypesIcons (type) {
     const typeList = {
-      bug: { name: 'Inseto', type: bug, color: pokemonColorTypes.$bug },
-      dark: { name: 'Noturno', type: dark, color: pokemonColorTypes.$dark },
-      dragon: { name: 'Dragão', type: dragon, color: pokemonColorTypes.$dragon },
-      electric: { name: 'Elétrico', type: electric, color: pokemonColorTypes.$electric },
-      fairy: { name: 'Fada', type: fairy, color: pokemonColorTypes.$fairy },
-      fighting: { name: 'Lutador', type: fighting, color: pokemonColorTypes.$figthing },
-      fire: { name: 'Fogo', type: fire, color: pokemonColorTypes.$fire },
-      flying: { name: 'Voador', type: flying, color: pokemonColorTypes.$flying },
-      ghost: { name: 'Fantasma', type: ghost, color: pokemonColorTypes.$ghost },
-      grass: { name: 'Grama', type: grass, color: pokemonColorTypes.$grass },
-      ground: { name: 'Terrestre', type: ground, color: pokemonColorTypes.$ground },
-      ice: { name: 'Gelo', type: ice, color: pokemonColorTypes.$ice },
-      normal: { name: 'Normal', type: normal, color: pokemonColorTypes.$normal },
-      poison: { name: 'Venenoso', type: poison, color: pokemonColorTypes.$poison },
-      psychic: { name: 'Psiquico', type: psychic, color: pokemonColorTypes.$psychic },
-      rock: { name: 'Pedra', type: rock, color: pokemonColorTypes.$rock },
-      steel: { name: 'Aço', type: steel, color: pokemonColorTypes.$steel },
-      water: { name: 'Agua', type: water, color: pokemonColorTypes.$water }
+      bug: { name: 'Inseto', imageType: bug, color: pokemonColorTypes.$bug },
+      dark: { name: 'Noturno', imageType: dark, color: pokemonColorTypes.$dark },
+      dragon: { name: 'Dragão', imageType: dragon, color: pokemonColorTypes.$dragon },
+      electric: { name: 'Elétrico', imageType: electric, color: pokemonColorTypes.$electric },
+      fairy: { name: 'Fada', imageType: fairy, color: pokemonColorTypes.$fairy },
+      fighting: { name: 'Lutador', imageType: fighting, color: pokemonColorTypes.$figthing },
+      fire: { name: 'Fogo', imageType: fire, color: pokemonColorTypes.$fire },
+      flying: { name: 'Voador', imageType: flying, color: pokemonColorTypes.$flying },
+      ghost: { name: 'Fantasma', imageType: ghost, color: pokemonColorTypes.$ghost },
+      grass: { name: 'Grama', imageType: grass, color: pokemonColorTypes.$grass },
+      ground: { name: 'Terrestre', imageType: ground, color: pokemonColorTypes.$ground },
+      ice: { name: 'Gelo', imageType: ice, color: pokemonColorTypes.$ice },
+      normal: { name: 'Normal', imageType: normal, color: pokemonColorTypes.$normal },
+      poison: { name: 'Venenoso', imageType: poison, color: pokemonColorTypes.$poison },
+      psychic: { name: 'Psiquico', imageType: psychic, color: pokemonColorTypes.$psychic },
+      rock: { name: 'Pedra', imageType: rock, color: pokemonColorTypes.$rock },
+      steel: { name: 'Aço', imageType: steel, color: pokemonColorTypes.$steel },
+      water: { name: 'Agua', imageType: water, color: pokemonColorTypes.$water }
     }
     return typeList[type]
   }
@@ -71,7 +71,7 @@ function PokemonType () {
           >
             <div >
               <img
-                src={pokemon.type}
+                src={pokemon.imageType}
                 alt={pokemon.name}
               />
               <p>{pokemon.name}</p>
