@@ -1,26 +1,31 @@
 import axios from 'axios'
 class Api {
+  constructor() {
+    this.urlEvolutionChainOffset = 'https://pokeapi.co/api/v2/evolution-chain/?offset=0&limit=30'
+    this.urlPokemon = 'https://pokeapi.co/api/v2/pokemon/'
+    this.urlPokemonSpecies = 'https://pokeapi.co/api/v2/pokemon-species/'
+  }
+
   async getUrlEvolutionChains () {
-    const url = 'https://pokeapi.co/api/v2/evolution-chain/?offset=0&limit=30'
-    const response = await axios.get(url)
+    const response = await axios.get(this.urlEvolutionChainOffset)
     return response.data.results
   }
 
   async getPokemonList () {
     const list = await this.getUrlEvolutionChains()
-    const container = []
-    await Promise.all(list.map(async item => {
-      const res = await this.fetchPokemonEvolutionChain(item.url)
-      container.push(res.chain?.species.name)
+    const response = []
+    await Promise.all(list.map(async (item) => {
+      const res = await this.getPokemonEvolutionChain(item.url)
+      response.push(res.chain?.species.name)
     }))
     return container
   }
 
-  async fetchPokemon (param) {
-    const pokemonInfo = await this.fetchPokemonInfo(param)
+  async getPokemon (param) {
+    const pokemonInfo = await this.getPokemonInfo(param)
     if (param) {
-      const pokemonSpecies = await this.fetchPokemonSpecies(this.removeSufixName(pokemonInfo.name))
-      const pokemonEvolutionChain = await this.fetchPokemonEvolutionChain(pokemonSpecies.evolution_chain.url)
+      const pokemonSpecies = await this.getPokemonSpecies(pokemonInfo.id)
+      const pokemonEvolutionChain = await this.getPokemonEvolutionChain(pokemonSpecies.evolution_chain.url)
       return [pokemonInfo, pokemonSpecies, pokemonEvolutionChain]
     }
   }
@@ -39,8 +44,8 @@ class Api {
     const container = []
     await Promise.all(evolutionNames.map(async (item, index) => {
       if (item) {
-        const res = await this.fetchPokemonInfo(item)
-        container.push({
+        const res = await this.getPokemonInfo(item)
+        evolutions.push({
           index,
           name: res.species?.name,
           urlSpecie: res.species?.url,
@@ -58,7 +63,7 @@ class Api {
   }
 
   async getPokemonFullInfo (param) {
-    const [pokemonInfo, pokemonSpecies, pokemonEvolutionChain] = await this.fetchPokemon(param)
+    const [pokemonInfo, pokemonSpecies, pokemonEvolutionChain] = await this.getPokemon(param)
     const evolutions = await this.getPokemonEvolutions(pokemonEvolutionChain)
     return {
       name: pokemonInfo.species?.name,
@@ -73,36 +78,6 @@ class Api {
       color: pokemonSpecies.color.name,
       shape: pokemonSpecies.shape.name,
       evolutions: evolutions
-    }
-  }
-
-  async fetchPokemonInfo (param) {
-    const url = `https://pokeapi.co/api/v2/pokemon/${this.addSufixOnName(param)}`
-    try {
-      if (param === '0') return
-      const response = await axios.get(url)
-      return response.data
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  async fetchPokemonEvolutionChain (param) {
-    try {
-      const response = await axios.get(param)
-      return response.data
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  async fetchPokemonSpecies (param) {
-    const url = `https://pokeapi.co/api/v2/pokemon-species/${param}`
-    try {
-      const response = await axios.get(url)
-      return response.data
-    } catch (err) {
-      console.log(err)
     }
   }
 
@@ -140,6 +115,33 @@ class Api {
     if (param.includes('striped')) { param = param.replace('-striped', '') }
     if (param.includes('average')) { param = param.replace('-average', '') }
     return param
+  }
+  async getPokemonInfo (param) {
+    try {
+      if (param === '0') return
+      const response = await axios.get(`${this.urlPokemon}${this.addSufixOnName(param)}`)
+      return response.data
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async getPokemonEvolutionChain (param) {
+    try {
+      const response = await axios.get(param)
+      return response.data
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async getPokemonSpecies (param) {
+    try {
+      const response = await axios.get(`${this.urlPokemonSpecies}${param}`)
+      return response.data
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 
