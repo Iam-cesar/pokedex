@@ -13,10 +13,10 @@ class Api {
 
   async getPokemonList () {
     const list = await this.getUrlEvolutionChains()
-    const response = []
+    const container = []
     await Promise.all(list.map(async (item) => {
       const res = await this.getPokemonEvolutionChain(item.url)
-      response.push(res.chain?.species.name)
+      container.push(res.chain?.species.name)
     }))
     return container
   }
@@ -45,7 +45,7 @@ class Api {
     await Promise.all(evolutionNames.map(async (item, index) => {
       if (item) {
         const res = await this.getPokemonInfo(item)
-        evolutions.push({
+        container.push({
           index,
           name: res.species?.name,
           urlSpecie: res.species?.url,
@@ -116,6 +116,7 @@ class Api {
     if (param.includes('average')) { param = param.replace('-average', '') }
     return param
   }
+
   async getPokemonInfo (param) {
     try {
       if (param === '0') return
