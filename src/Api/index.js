@@ -123,7 +123,7 @@ class Api {
       const response = await axios.get(`${this.urlPokemon}${this.addSufixOnName(param)}`)
       return response.data
     } catch (err) {
-      console.log(err)
+      return err
     }
   }
 
@@ -132,7 +132,7 @@ class Api {
       const response = await axios.get(param)
       return response.data
     } catch (err) {
-      console.log(err)
+      return err
     }
   }
 
@@ -141,7 +141,7 @@ class Api {
       const response = await axios.get(`${this.urlPokemonSpecies}${param}`)
       return response.data
     } catch (err) {
-      console.log(err)
+      return err
     }
   }
 }

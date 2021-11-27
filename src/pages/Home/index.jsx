@@ -4,8 +4,7 @@ import SearchInput from 'components/SearchInput'
 import MainCard from 'components/MainCard'
 import Evolution from 'components/Evolution'
 import PokemonType from 'components/PokemonType'
-import PokemonPrevius from 'components/PokemonPrevius'
-import PokemonNext from 'components/PokemonNext'
+import StatsInfo from 'components/StatsInfo'
 import Footer from 'components/Footer'
 import PokemonInfo from 'components/PokemonList'
 import Title from 'components/Title'
@@ -32,8 +31,7 @@ function Home () {
           style={{ gridArea: 'title__type' }}
         />
         <PokemonType />
-        <PokemonPrevius />
-        <PokemonNext />
+        <StatsInfo />
         <Footer />
       </HomeContainer>
     </PokemonProvider>

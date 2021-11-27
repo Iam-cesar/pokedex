@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
-import { SearchInputContainer } from './style'
+import { SearchInputContainer, errorToastStyle } from './style'
 import { PokemonContext } from 'context/pokemon'
-import { $errorColor } from 'components/UI/colors'
 import toast, { Toaster } from 'react-hot-toast'
 import IconImg from 'components/IconImg'
 import searchIcon from 'assets/svg/search_icon.svg'
@@ -14,7 +13,6 @@ function SearchInput () {
   } = useContext(PokemonContext)
 
   const [searchText, setSearchText] = useState('')
-  const toastStyle = { color: `${$errorColor}` }
   const searchInputRef = useRef('')
 
   useEffect(() => {
@@ -60,7 +58,7 @@ function SearchInput () {
   return (
     <SearchInputContainer>
       <Toaster
-        toastOptions={{ style: toastStyle }}
+        toastOptions={{ style: errorToastStyle }}
         position={'top-center'}
       />
       <IconImg

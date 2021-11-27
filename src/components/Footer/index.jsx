@@ -3,7 +3,8 @@ import { FooterContainer } from './style'
 
 function Footer () {
   return (
-    <FooterContainer></FooterContainer>
+    <FooterContainer>
+    </FooterContainer>
   )
 }
 
