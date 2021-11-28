@@ -8,8 +8,8 @@ import Api from 'Api'
 
 function SearchInput () {
   const {
-    response,
-    setResponse
+    pokemon,
+    setPokemon
   } = useContext(PokemonContext)
 
   const [searchText, setSearchText] = useState('')
@@ -22,12 +22,12 @@ function SearchInput () {
   useEffect(() => {
     clearElement(searchInputRef)
     setSearchText('')
-  }, [response])
+  }, [pokemon])
 
   async function handleFetchPokemon (param) {
     try {
       const data = await Api.getPokemonFullInfo(param)
-      setResponse(data)
+      setPokemon(data)
     } catch (err) {
       notify()
     }

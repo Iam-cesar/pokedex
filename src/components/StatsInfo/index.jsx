@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { usePokemon } from 'hooks/usePokemon'
 
 function StatsInfo () {
-  const { response } = usePokemon()
+  const { pokemon } = usePokemon()
   const [stats, setStats] = useState([])
 
   useEffect(() => {
-    setStats(response.stats)
-  }, [response.stats])
+    setStats(pokemon.stats)
+  }, [pokemon.stats])
 
   function handleTranslateStats (stat) {
     const stats = {

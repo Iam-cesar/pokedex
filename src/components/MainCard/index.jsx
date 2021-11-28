@@ -5,7 +5,7 @@ import { usePokemon } from 'hooks/usePokemon'
 import { stylingPokemonId } from 'components/UI/mixins'
 
 function MainCard () {
-  const { response } = usePokemon()
+  const { pokemon } = usePokemon()
   const animatedSpritesUntilToday = 649
 
   function capitalize (string) {
@@ -15,16 +15,16 @@ function MainCard () {
   return (
     <MainCardContainer>
       <div className='main__card'>
-        <h1>{capitalize(response?.name || '')}</h1>
-        <p>{stylingPokemonId(response.id)}</p>
+        <h1>{capitalize(pokemon?.name || '')}</h1>
+        <p>{stylingPokemonId(pokemon.id)}</p>
       </div>
       <IconImg
         className='main__card__img'
-        img={response?.id <= animatedSpritesUntilToday
-          ? response?.imgAnimated
-          : response?.image || ''}
-        alt={response.name
-          ? `Pokemon ${capitalize(response?.name)}`
+        img={pokemon?.id <= animatedSpritesUntilToday
+          ? pokemon?.imgAnimated
+          : pokemon?.image || ''}
+        alt={pokemon.name
+          ? `Pokemon ${capitalize(pokemon?.name)}`
           : ''}
       />
     </MainCardContainer>
