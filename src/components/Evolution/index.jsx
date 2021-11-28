@@ -22,6 +22,7 @@ function Evolution () {
         return (
           item
             ? <a
+              key={index}
               onClick={() => handleMainCardWithSelectedFromEvolution(evolutions, index)}
               className='evolutions__container'
             >

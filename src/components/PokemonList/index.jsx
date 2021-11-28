@@ -2,6 +2,7 @@ import { PokemonListContainer } from './style'
 import React, { useEffect, useState } from 'react'
 import Api from 'Api'
 import { usePokemon } from 'hooks/usePokemon'
+import pokeball from 'assets/svg/pokeball.svg'
 
 function PokemonList () {
   const { setResponse } = usePokemon()
@@ -30,7 +31,7 @@ function PokemonList () {
             onClick={() => setResponse(pokemonList[index])}
           >
             <div className='pokemon-list'>
-              <img src={item.image} alt={item.name} />
+              <img src={item.image || pokeball} alt={item.name} />
               <p>{item.name}</p>
             </div>
           </a>
