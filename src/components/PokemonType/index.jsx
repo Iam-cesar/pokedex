@@ -22,12 +22,12 @@ import steel from 'assets/pokemonTypes/steel.png'
 import water from 'assets/pokemonTypes/water.png'
 
 function PokemonType () {
-  const { response } = usePokemon()
+  const { pokemon } = usePokemon()
   const [pokemonType, setPokemonType] = useState([])
 
   useEffect(() => {
-    setPokemonType(response.type)
-  }, [response.type])
+    setPokemonType(pokemon.type)
+  }, [pokemon.type])
 
   function handleTypesIcons (type) {
     const typeList = {

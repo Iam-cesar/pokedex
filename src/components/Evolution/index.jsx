@@ -4,16 +4,16 @@ import { EvolutionContainer } from './style'
 import { stylingPokemonId } from 'components/UI/mixins'
 
 function Evolution () {
-  const { response, setResponse } = usePokemon()
+  const { pokemon, setPokemon } = usePokemon()
   const [evolutions, setEvolutions] = useState([])
 
   useEffect(() => {
-    setEvolutions(response.evolutions)
-  }, [response.evolutions])
+    setEvolutions(pokemon.evolutions)
+  }, [pokemon.evolutions])
 
   function handleMainCardWithSelectedFromEvolution (pokemon, index) {
-    const container = Object.assign(pokemon[index], { evolutions: response.evolutions })
-    setResponse(container)
+    const container = Object.assign(pokemon[index], { evolutions: pokemon.evolutions })
+    setPokemon(container)
   }
 
   return (
