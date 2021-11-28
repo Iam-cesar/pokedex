@@ -11,8 +11,8 @@ function Evolution () {
     setEvolutions(pokemon.evolutions)
   }, [pokemon.evolutions])
 
-  function handleMainCardWithSelectedFromEvolution (pokemon, index) {
-    const container = Object.assign(pokemon[index], { evolutions: pokemon.evolutions })
+  function handleMainCardWithSelectedFromEvolution (data, index) {
+    const container = Object.assign(data[index], { evolutions: pokemon.evolutions })
     setPokemon(container)
   }
 
