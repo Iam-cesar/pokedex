@@ -1,13 +1,13 @@
 import React from 'react'
 import { GlobalStyle } from 'components/UI/GlobalStyle'
 import Home from 'pages/Home'
-import AsideNavigation from 'components/AsideNavigation'
+import Aside from 'components/Aside'
 
 function App () {
   return (
     <div className="App" style={style} >
       <GlobalStyle />
-      <AsideNavigation />
+      <Aside />
       <Home />
     </div>
   )

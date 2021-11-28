@@ -26,7 +26,7 @@ class Api {
     if (param) {
       const pokemonSpecies = await this.getPokemonSpecies(pokemonInfo.id)
       const pokemonEvolutionChain = await this.getPokemonEvolutionChain(pokemonSpecies.evolution_chain.url)
-      return [pokemonInfo, pokemonSpecies, pokemonEvolutionChain]
+      return { pokemonInfo, pokemonSpecies, pokemonEvolutionChain }
     }
   }
 
@@ -54,8 +54,7 @@ class Api {
           imgAnimated: res?.sprites.versions['generation-v']['black-white'].animated?.front_default,
           type: res.types,
           stats: res.stats,
-          abilities: res.abilities,
-          weight: res.weight
+          abilities: res.abilities
         })
       }
     }))
@@ -63,7 +62,7 @@ class Api {
   }
 
   async getPokemonFullInfo (param) {
-    const [pokemonInfo, pokemonSpecies, pokemonEvolutionChain] = await this.getPokemon(param)
+    const { pokemonInfo, pokemonEvolutionChain } = await this.getPokemon(param)
     const evolutions = await this.getPokemonEvolutions(pokemonEvolutionChain)
     return {
       name: pokemonInfo.species?.name,
@@ -74,9 +73,6 @@ class Api {
       type: pokemonInfo.types,
       stats: pokemonInfo.stats,
       abilities: pokemonInfo.abilities,
-      weight: pokemonInfo.weight,
-      color: pokemonSpecies.color.name,
-      shape: pokemonSpecies.shape.name,
       evolutions: evolutions
     }
   }

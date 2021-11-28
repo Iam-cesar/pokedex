@@ -18,9 +18,6 @@ export function PokemonProvider ({ children }) {
       type: [],
       stats: [],
       abilities: [],
-      weight: '',
-      color: '',
-      shape: '',
       evolutions: [{
         name: '',
         id: '',
