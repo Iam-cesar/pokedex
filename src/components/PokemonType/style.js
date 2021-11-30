@@ -5,6 +5,7 @@ export const PokemonTypeContainer = styled.div`
   ${cardConfig}
   align-items: center;
   display: flex;
+  flex-direction: column;
   grid-area: type;
 
   .pokemon__type--container,
@@ -19,6 +20,7 @@ export const PokemonTypeContainer = styled.div`
     div{
       align-items:center;
       display:flex;
+      flex-direction: column;
       
       img{
         height: 32px;
