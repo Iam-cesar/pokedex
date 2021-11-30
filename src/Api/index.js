@@ -21,48 +21,46 @@ class Api {
     return container
   }
 
-  async getPokemon (param) {
-    const pokemonInfo = await this.getPokemonInfo(param)
-    if (param) {
-      const pokemonSpecies = await this.getPokemonSpecies(pokemonInfo.id)
-      const pokemonEvolutionChain = await this.getPokemonEvolutionChain(pokemonSpecies.evolution_chain.url)
-      return { pokemonInfo, pokemonSpecies, pokemonEvolutionChain }
-    }
+  async getPokemon (nameOrId) {
+    const pokemonInfo = await this.getPokemonInfo(nameOrId)
+    if (!nameOrId) return
+    const pokemonSpecies = await this.getPokemonSpecies(pokemonInfo.id)
+    const pokemonEvolutionChain = await this.getPokemonEvolutionChain(pokemonSpecies.evolution_chain.url)
+    return { pokemonInfo, pokemonSpecies, pokemonEvolutionChain }
   }
 
   async getPokemonEvolutionNames (pokemonEvolutionChain) {
-    const pokemons = [
+    const pokemonEvolutionNames = [
       pokemonEvolutionChain.chain?.species.name || '',
       pokemonEvolutionChain.chain?.evolves_to[0]?.species.name || '',
       pokemonEvolutionChain.chain?.evolves_to[0]?.evolves_to[0]?.species.name || ''
     ]
-    return pokemons
+    return pokemonEvolutionNames
   }
 
-  async getPokemonEvolutions (param) {
-    const evolutionNames = await this.getPokemonEvolutionNames(param)
+  async getPokemonEvolutions (pokemonNames) {
+    const evolutionNames = await this.getPokemonEvolutionNames(pokemonNames)
     const container = []
     await Promise.all(evolutionNames.map(async (item, index) => {
-      if (item) {
-        const res = await this.getPokemonInfo(item)
-        container.push({
-          index,
-          name: res.species?.name,
-          urlSpecie: res.species?.url,
-          id: res.id,
-          image: res.sprites?.front_default,
-          imgAnimated: res?.sprites.versions['generation-v']['black-white'].animated?.front_default,
-          type: res.types,
-          stats: res.stats,
-          abilities: res.abilities
-        })
-      }
+      if (!item) return
+      const res = await this.getPokemonInfo(item)
+      container.push({
+        index,
+        name: res.species?.name,
+        urlSpecie: res.species?.url,
+        id: res.id,
+        image: res.sprites?.front_default,
+        imgAnimated: res?.sprites.versions['generation-v']['black-white'].animated?.front_default,
+        type: res.types,
+        stats: res.stats,
+        abilities: res.abilities
+      })
     }))
     return container.sort((a, b) => (a.index > b.index) ? 1 : -1)
   }
 
-  async getPokemonFullInfo (param) {
-    const { pokemonInfo, pokemonEvolutionChain } = await this.getPokemon(param)
+  async getPokemonFullInfo (nameOrId) {
+    const { pokemonInfo, pokemonEvolutionChain } = await this.getPokemon(nameOrId)
     const evolutions = await this.getPokemonEvolutions(pokemonEvolutionChain)
     return {
       name: pokemonInfo.species?.name,
@@ -77,7 +75,7 @@ class Api {
     }
   }
 
-  addSufixOnName (param) {
+  treatAddSufixOn (name) {
     const specialPokemons = {
       incarnate: ['tornadus', 'thundurus', 'landorus'],
       ordinary: ['keldeo'],
@@ -88,44 +86,53 @@ class Api {
       striped: ['basculin'],
       average: ['gourgeist', 'pumpkaboo']
     }
+    this.addSufixOn(name, specialPokemons.incarnate, '-incarnate')
+    this.addSufixOn(name, specialPokemons.ordinary, '-ordinary')
+    this.addSufixOn(name, specialPokemons.aria, '-aria')
+    this.addSufixOn(name, specialPokemons.baile, '-baile')
+    this.addSufixOn(name, specialPokemons.red, '-red')
+    this.addSufixOn(name, specialPokemons.altered, '-altered')
+    this.addSufixOn(name, specialPokemons.striped, '-red-striped')
+    this.addSufixOn(name, specialPokemons.average, '-average')
 
-    if (specialPokemons.incarnate.includes(param)) { param = param + '-incarnate' }
-    if (specialPokemons.ordinary.includes(param)) { param = param + '-ordinary' }
-    if (specialPokemons.aria.includes(param)) { param = param + '-aria' }
-    if (specialPokemons.baile.includes(param)) { param = param + '-baile' }
-    if (specialPokemons.red.includes(param)) { param = param + '-red' }
-    if (specialPokemons.altered.includes(param)) { param = param + '-altered' }
-    if (specialPokemons.striped.includes(param)) { param = param + '-red-striped' }
-    if (specialPokemons.average.includes(param)) { param = param + '-average' }
-    return param
+    return name
   }
 
-  removeSufixName (param) {
-    if (param.includes('incarnate')) { param = param.replace('-incarnate', '') }
-    if (param.includes('ordinary')) { param = param.replace('-ordinary', '') }
-    if (param.includes('aria')) { param = param.replace('-aria', '') }
-    if (param.includes('baile')) { param = param.replace('-baile', '') }
-    if (param.includes('red')) { param = param.replace('-red', '') }
-    if (param.includes('meteor')) { param = param.replace('-meteor', '') }
-    if (param.includes('altered')) { param = param.replace('-altered', '') }
-    if (param.includes('striped')) { param = param.replace('-striped', '') }
-    if (param.includes('average')) { param = param.replace('-average', '') }
-    return param
+  addSufixOn (name, specialName, sufix) {
+    if (specialName.includes(name)) { name = `${name}${sufix}` }
+    return name
   }
 
-  async getPokemonInfo (param) {
+  treatRemoveSufixOf (name) {
+    this.removeSufixOf(name, 'incarnate')
+    this.removeSufixOf(name, 'ordinary')
+    this.removeSufixOf(name, 'aria')
+    this.removeSufixOf(name, 'baile')
+    this.removeSufixOf(name, 'red')
+    this.removeSufixOf(name, 'meteor')
+    this.removeSufixOf(name, 'altered')
+    this.removeSufixOf(name, 'striped')
+    return name
+  }
+
+  removeSufixOf(name, sufix) {
+    if (name.includes(sufix)) { name = name.replace(`-${sufix}`, '') }
+    return name
+  }
+
+  async getPokemonInfo (name) {
     try {
-      if (param === '0') return
-      const response = await axios.get(`${this.urlPokemon}${this.addSufixOnName(param)}`)
+      if (name === '0') return
+      const response = await axios.get(`${this.urlPokemon}${this.treatAddSufixOn(name)}`)
       return response.data
     } catch (err) {
       return err
     }
   }
 
-  async getPokemonEvolutionChain (param) {
+  async getPokemonEvolutionChain (UrlChain) {
     try {
-      const response = await axios.get(param)
+      const response = await axios.get(UrlChain)
       return response.data
     } catch (err) {
       return err
