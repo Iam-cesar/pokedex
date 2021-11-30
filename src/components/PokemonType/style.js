@@ -35,10 +35,10 @@ export const PokemonTypeContainer = styled.div`
 
   .pokemon__type--double--container{
     :nth-child(1n){
-      border-radius: 15px 0 0 15px;
+      border-radius: 15px 15px 0 0;
     }
     :nth-child(2n){
-      border-radius: 0 15px 15px 0;
+      border-radius: 0 0 15px 15px;
     }
   }
 `
