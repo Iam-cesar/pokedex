@@ -4,7 +4,7 @@ import { PokemonContext } from 'context/pokemon'
 import toast, { Toaster } from 'react-hot-toast'
 import IconImg from 'components/IconImg'
 import searchIcon from 'assets/svg/search_icon.svg'
-import Api from 'Api'
+import Pokemon from 'api/Pokemon'
 
 function SearchInput () {
   const {
@@ -12,6 +12,7 @@ function SearchInput () {
     setPokemon
   } = useContext(PokemonContext)
 
+  const Apipokemon = new Pokemon()
   const [searchText, setSearchText] = useState('')
   const searchInputRef = useRef('')
 
@@ -26,7 +27,7 @@ function SearchInput () {
 
   async function handleFetchPokemon (nameOrId) {
     try {
-      const response = await Api.getPokemonFullInfo(nameOrId)
+      const response = await Apipokemon.getAllInformation(nameOrId)
       setPokemon(response)
     } catch (err) {
       notify()

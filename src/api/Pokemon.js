@@ -1,35 +1,35 @@
 import axios from 'axios'
-class Api {
+class Pokemon {
   constructor() {
     this.urlEvolutionChainOffset = 'https://pokeapi.co/api/v2/evolution-chain/?offset=0&limit=30'
     this.urlPokemon = 'https://pokeapi.co/api/v2/pokemon/'
     this.urlPokemonSpecies = 'https://pokeapi.co/api/v2/pokemon-species/'
   }
 
-  async getUrlEvolutionChains () {
+  async getAllUrlsOfEvolution () {
     const response = await axios.get(this.urlEvolutionChainOffset)
     return response.data.results
   }
 
-  async getPokemonList () {
-    const list = await this.getUrlEvolutionChains()
-    const container = []
-    await Promise.all(list.map(async (item) => {
-      const res = await this.getPokemonEvolutionChain(item.url)
-      container.push(res.chain?.species.name)
+  async getGroup () {
+    const allUrls = await this.getAllUrlsOfEvolution()
+    const group = []
+    await Promise.all(allUrls.map(async (item) => {
+      const oneUrl = await this.getOneUrlOfEvolution(item.url)
+      group.push(oneUrl.chain?.species.name)
     }))
-    return container
+    return group
   }
 
-  async getOnePokemonInfo (nameOrId) {
-    const pokemonInfo = await this.getPokemonInfo(nameOrId)
+  async getOne (nameOrId) {
+    const pokemonInfo = await this.getInformation(nameOrId)
     if (!nameOrId) return
-    const pokemonSpecies = await this.getPokemonSpecies(pokemonInfo.id)
-    const pokemonEvolutionChain = await this.getPokemonEvolutionChain(pokemonSpecies.evolution_chain.url)
+    const pokemonSpecies = await this.getSpecies(pokemonInfo.id)
+    const pokemonEvolutionChain = await this.getOneUrlOfEvolution(pokemonSpecies.evolution_chain.url)
     return { pokemonInfo, pokemonSpecies, pokemonEvolutionChain }
   }
 
-  async getPokemonEvolutionNames (pokemonEvolutionChain) {
+  async getEvolutionNames (pokemonEvolutionChain) {
     const pokemonEvolutionNames = [
       pokemonEvolutionChain.chain?.species.name || '',
       pokemonEvolutionChain.chain?.evolves_to[0]?.species.name || '',
@@ -38,12 +38,12 @@ class Api {
     return pokemonEvolutionNames
   }
 
-  async getPokemonEvolutions (pokemonNames) {
-    const evolutionNames = await this.getPokemonEvolutionNames(pokemonNames)
+  async getEvolutions (pokemonNames) {
+    const evolutionNames = await this.getEvolutionNames(pokemonNames)
     const container = []
     await Promise.all(evolutionNames.map(async (item, index) => {
       if (!item) return
-      const res = await this.getPokemonInfo(item)
+      const res = await this.getInformation(item)
       container.push({
         index,
         name: res.species?.name,
@@ -59,9 +59,9 @@ class Api {
     return container.sort((a, b) => (a.index > b.index) ? 1 : -1)
   }
 
-  async getPokemonFullInfo (nameOrId) {
-    const { pokemonInfo, pokemonEvolutionChain } = await this.getOnePokemonInfo(nameOrId)
-    const evolutions = await this.getPokemonEvolutions(pokemonEvolutionChain)
+  async getAllInformation (nameOrId) {
+    const { pokemonInfo, pokemonEvolutionChain } = await this.getOne(nameOrId)
+    const evolutions = await this.getEvolutions(pokemonEvolutionChain)
     return {
       name: pokemonInfo.species?.name,
       urlSpecie: pokemonInfo.species?.url,
@@ -120,7 +120,7 @@ class Api {
     return name
   }
 
-  async getPokemonInfo (name) {
+  async getInformation (name) {
     try {
       if (name === '0') return
       const response = await axios.get(`${this.urlPokemon}${this.treatAddSufixOn(name)}`)
@@ -130,7 +130,7 @@ class Api {
     }
   }
 
-  async getPokemonEvolutionChain (UrlChain) {
+  async getOneUrlOfEvolution (UrlChain) {
     try {
       const response = await axios.get(UrlChain)
       return response.data
@@ -139,7 +139,7 @@ class Api {
     }
   }
 
-  async getPokemonSpecies (param) {
+  async getSpecies (param) {
     try {
       const response = await axios.get(`${this.urlPokemonSpecies}${param}`)
       return response.data
@@ -149,4 +149,4 @@ class Api {
   }
 }
 
-export default new Api()
+export default Pokemon
