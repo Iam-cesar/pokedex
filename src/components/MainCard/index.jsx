@@ -14,7 +14,7 @@ function MainCard () {
 
   return (
     <MainCardContainer>
-      <div className='main__card'>
+      <div className='main__card__title'>
         <h1>{capitalize(pokemon?.name || '')}</h1>
         <p>{stylingPokemonId(pokemon.id)}</p>
       </div>

@@ -11,8 +11,8 @@ export const AsideContainer = styled.aside`
   padding: 24px 30px;
 
   nav{
-    height: 80%;
     display: grid;
+    height: 80%;
     place-items: center;
   }
 

@@ -21,7 +21,7 @@ class Api {
     return container
   }
 
-  async getPokemon (nameOrId) {
+  async getOnePokemonInfo (nameOrId) {
     const pokemonInfo = await this.getPokemonInfo(nameOrId)
     if (!nameOrId) return
     const pokemonSpecies = await this.getPokemonSpecies(pokemonInfo.id)
@@ -60,7 +60,7 @@ class Api {
   }
 
   async getPokemonFullInfo (nameOrId) {
-    const { pokemonInfo, pokemonEvolutionChain } = await this.getPokemon(nameOrId)
+    const { pokemonInfo, pokemonEvolutionChain } = await this.getOnePokemonInfo(nameOrId)
     const evolutions = await this.getPokemonEvolutions(pokemonEvolutionChain)
     return {
       name: pokemonInfo.species?.name,
