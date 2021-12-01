@@ -10,7 +10,7 @@ function StatsInfo () {
     setStats(pokemon.stats)
   }, [pokemon.stats])
 
-  function handleTranslateStats (stat) {
+  function handleTranslate (statsName) {
     const stats = {
       hp: 'Vida',
       attack: 'Ataque',
@@ -19,7 +19,7 @@ function StatsInfo () {
       'special-defense': 'Defesa especial',
       speed: 'Velocidade'
     }
-    return stats[stat]
+    return stats[statsName]
   }
 
   return (
@@ -28,7 +28,7 @@ function StatsInfo () {
         {stats.map((item, index) => {
           return (
             <tr key={index}>
-              <td>{handleTranslateStats(item?.stat.name)}</td>
+              <td>{handleTranslate(item?.stat.name)}</td>
               <td className='pokemon__info__stats__number'>{item?.base_stat}</td>
             </tr>
           )

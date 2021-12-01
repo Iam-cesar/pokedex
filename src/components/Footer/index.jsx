@@ -4,10 +4,11 @@ import { FooterContainer } from './style'
 function Footer () {
   return (
     <FooterContainer>
-      <p>Code and designed by <a
-        href="https://github.com/cesar-abj"
-        target='_blank' rel="noreferrer"
-      >Cesar Augusto</a></p>
+      <p>Code and designed by
+        <a href="https://github.com/cesar-abj"
+          target='_blank' rel="noreferrer"
+        > Cesar Augusto</a>
+      </p>
     </FooterContainer>
   )
 }

@@ -14,12 +14,12 @@ function PokemonList () {
 
   async function handlePokemonsList () {
     const res = await Api.getPokemonList()
-    const array = []
+    const container = []
     await Promise.all(res.map(async (item) => {
       const pokemon = await Api.getPokemonFullInfo(item)
-      array.push(pokemon)
+      container.push(pokemon)
     }))
-    setPokemonList(array)
+    setPokemonList(container)
   }
 
   return (

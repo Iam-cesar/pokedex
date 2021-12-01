@@ -24,10 +24,10 @@ function SearchInput () {
     setSearchText('')
   }, [pokemon])
 
-  async function handleFetchPokemon (param) {
+  async function handleFetchPokemon (nameOrId) {
     try {
-      const data = await Api.getPokemonFullInfo(param)
-      setPokemon(data)
+      const response = await Api.getPokemonFullInfo(nameOrId)
+      setPokemon(response)
     } catch (err) {
       notify()
     }

@@ -29,26 +29,50 @@ function PokemonType () {
     setPokemonType(pokemon.type)
   }, [pokemon.type])
 
+  function handleTranslate(name) {
+    const names = {
+      bug: 'Inseto',
+      dark: 'Noturno',
+      dragon: 'Dragão',
+      electric: 'Elétrico',
+      fairy: 'Fada',
+      fighting: 'Lutador',
+      fire: 'Fogo',
+      flying: 'Voador',
+      ghost: 'Fantasma',
+      grass: 'Grama',
+      ground: 'Terrestre',
+      ice: 'Gelo',
+      normal: 'Normal',
+      poison: 'Venenoso',
+      psychic: 'Psiquico',
+      rock: 'Pedra',
+      steel: 'Aço',
+      water: 'Agua'
+    }
+    return names[name]
+  }
+
   function handleTypesIcons (type) {
     const typeList = {
-      bug: { name: 'Inseto', imageType: bug, color: pokemonColorTypes.$bug },
-      dark: { name: 'Noturno', imageType: dark, color: pokemonColorTypes.$dark },
-      dragon: { name: 'Dragão', imageType: dragon, color: pokemonColorTypes.$dragon },
-      electric: { name: 'Elétrico', imageType: electric, color: pokemonColorTypes.$electric },
-      fairy: { name: 'Fada', imageType: fairy, color: pokemonColorTypes.$fairy },
-      fighting: { name: 'Lutador', imageType: fighting, color: pokemonColorTypes.$figthing },
-      fire: { name: 'Fogo', imageType: fire, color: pokemonColorTypes.$fire },
-      flying: { name: 'Voador', imageType: flying, color: pokemonColorTypes.$flying },
-      ghost: { name: 'Fantasma', imageType: ghost, color: pokemonColorTypes.$ghost },
-      grass: { name: 'Grama', imageType: grass, color: pokemonColorTypes.$grass },
-      ground: { name: 'Terrestre', imageType: ground, color: pokemonColorTypes.$ground },
-      ice: { name: 'Gelo', imageType: ice, color: pokemonColorTypes.$ice },
-      normal: { name: 'Normal', imageType: normal, color: pokemonColorTypes.$normal },
-      poison: { name: 'Venenoso', imageType: poison, color: pokemonColorTypes.$poison },
-      psychic: { name: 'Psiquico', imageType: psychic, color: pokemonColorTypes.$psychic },
-      rock: { name: 'Pedra', imageType: rock, color: pokemonColorTypes.$rock },
-      steel: { name: 'Aço', imageType: steel, color: pokemonColorTypes.$steel },
-      water: { name: 'Agua', imageType: water, color: pokemonColorTypes.$water }
+      bug: { imageType: bug, color: pokemonColorTypes.$bug },
+      dark: { imageType: dark, color: pokemonColorTypes.$dark },
+      dragon: { imageType: dragon, color: pokemonColorTypes.$dragon },
+      electric: { imageType: electric, color: pokemonColorTypes.$electric },
+      fairy: { imageType: fairy, color: pokemonColorTypes.$fairy },
+      fighting: { imageType: fighting, color: pokemonColorTypes.$figthing },
+      fire: { imageType: fire, color: pokemonColorTypes.$fire },
+      flying: { imageType: flying, color: pokemonColorTypes.$flying },
+      ghost: { imageType: ghost, color: pokemonColorTypes.$ghost },
+      grass: { imageType: grass, color: pokemonColorTypes.$grass },
+      ground: { imageType: ground, color: pokemonColorTypes.$ground },
+      ice: { imageType: ice, color: pokemonColorTypes.$ice },
+      normal: { imageType: normal, color: pokemonColorTypes.$normal },
+      poison: { imageType: poison, color: pokemonColorTypes.$poison },
+      psychic: { imageType: psychic, color: pokemonColorTypes.$psychic },
+      rock: { imageType: rock, color: pokemonColorTypes.$rock },
+      steel: { imageType: steel, color: pokemonColorTypes.$steel },
+      water: { imageType: water, color: pokemonColorTypes.$water }
     }
     return typeList[type]
   }
@@ -57,6 +81,7 @@ function PokemonType () {
     <PokemonTypeContainer>
       {pokemonType.map((item, index) => {
         const pokemon = handleTypesIcons(item.type.name)
+        const translatedName = handleTranslate(item.type.name)
         return (
           <div
             key={index}
@@ -72,9 +97,9 @@ function PokemonType () {
             <div >
               <img
                 src={pokemon.imageType}
-                alt={pokemon.name}
+                alt={translatedName}
               />
-              <p>{pokemon.name}</p>
+              <p>{translatedName}</p>
             </div>
           </div>
         )

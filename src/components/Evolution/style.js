@@ -11,12 +11,13 @@ export const EvolutionContainer = styled.div`
   
   .evolutions__container{
     cursor: pointer;
+
     .evolution__item{
-      height: 100%;
       align-items: center;
-      justify-content: flex-end;
       display: flex;
       flex-direction: column;
+      height: 100%;
+      justify-content: flex-end;
       
       h4{
         font-size: 1.2em;
