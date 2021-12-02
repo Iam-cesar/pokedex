@@ -28,7 +28,7 @@ export const PokemonTypeContainer = styled.div`
       }
       
       p{
-        font-size: 1.3em;
+        font-size: 1.3rem;
       }
     }
   }

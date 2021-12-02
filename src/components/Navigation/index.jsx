@@ -1,21 +1,21 @@
 import IconImg from 'components/IconImg'
 import React from 'react'
-import { AsideContainer } from './style'
+import { NavContainer } from './style'
 import searchIcon from 'assets/svg/pokeball.svg'
 
-function Aside () {
+function Navigation () {
   return (
-    <AsideContainer>
+    <NavContainer>
       <IconImg
-        className='aside__icon'
+        className='nav__icon'
         img={searchIcon}
         alt='alt'
       />
       <nav>
         <h1>Pokedex</h1>
       </nav>
-    </AsideContainer>
+    </NavContainer>
   )
 }
 
-export default Aside
+export default Navigation

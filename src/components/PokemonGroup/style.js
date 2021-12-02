@@ -5,11 +5,9 @@ export const PokemonGroupContainer = styled.div`
   ${cardConfig}
   grid-area: group;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 0 0 1em 0;
-  max-height: 90vh;
+  padding: 0 .5rem 1rem .5rem;
 
   .pokemon__group{
     align-items: center;

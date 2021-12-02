@@ -1,5 +1,3 @@
-// import Api from 'Api'
-
 class Pokemon {
   constructor() {
     this.index = 0
