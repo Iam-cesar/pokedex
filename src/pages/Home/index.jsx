@@ -6,7 +6,7 @@ import Evolution from 'components/Evolution'
 import PokemonType from 'components/PokemonType'
 import StatsInfo from 'components/StatsInfo'
 import Footer from 'components/Footer'
-import PokemonInfo from 'components/PokemonList'
+import PokemonGroup from 'components/PokemonGroup'
 import Title from 'components/Title'
 import { PokemonProvider } from 'context/pokemon'
 
@@ -16,7 +16,7 @@ function Home () {
       <HomeContainer>
         <SearchInput />
         <MainCard />
-        <PokemonInfo />
+        <PokemonGroup />
         <Title
           HtmlSize='h3'
           className='title__evolution'

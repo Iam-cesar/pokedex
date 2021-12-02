@@ -7,14 +7,14 @@ export const HomeContainer = styled.main`
   grid-template-rows: 0 5% 23% 2% 20% 2% 20% 8% 0;
   grid-template-areas: ". . . ."
                        "search search search search"
-                       "main main main list"
-                       "title__evolution title__evolution title__evolution list"
-                       "evolution evolution evolution list"
-                       "title__type title__type title__type list"
-                       "type statsInfo statsInfo list"
-                       "footer footer footer list"
+                       "main main main group"
+                       "title__evolution title__evolution title__evolution group"
+                       "evolution evolution evolution group"
+                       "title__type title__type title__type group"
+                       "type statsInfo statsInfo group"
+                       "footer footer footer group"
                        ". . . .";
   gap: 20px;
-  margin-left: 5rem;
+  margin-left: 3rem;
   max-width: 88%;
 `

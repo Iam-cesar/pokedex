@@ -6,13 +6,13 @@ class Pokemon {
     this.urlPokemonSpecies = 'https://pokeapi.co/api/v2/pokemon-species/'
   }
 
-  async getAllUrlsOfEvolution () {
+  async getUrlChainEvolutionOffset () {
     const response = await axios.get(this.urlEvolutionChainOffset)
     return response.data.results
   }
 
   async getGroup () {
-    const allUrls = await this.getAllUrlsOfEvolution()
+    const allUrls = await this.getUrlChainEvolutionOffset()
     const group = []
     await Promise.all(allUrls.map(async (item) => {
       const oneUrl = await this.getOneUrlOfEvolution(item.url)
@@ -75,6 +75,11 @@ class Pokemon {
     }
   }
 
+  addSufixOn (name, specialName, sufix) {
+    if (specialName.includes(name)) { name = `${name}${sufix}` }
+    return name
+  }
+
   treatAddSufixOn (name) {
     const specialPokemons = {
       incarnate: ['tornadus', 'thundurus', 'landorus'],
@@ -98,8 +103,8 @@ class Pokemon {
     return name
   }
 
-  addSufixOn (name, specialName, sufix) {
-    if (specialName.includes(name)) { name = `${name}${sufix}` }
+  removeSufixOf(name, sufix) {
+    if (name.includes(sufix)) { name = name.replace(`-${sufix}`, '') }
     return name
   }
 
@@ -112,11 +117,6 @@ class Pokemon {
     this.removeSufixOf(name, 'meteor')
     this.removeSufixOf(name, 'altered')
     this.removeSufixOf(name, 'striped')
-    return name
-  }
-
-  removeSufixOf(name, sufix) {
-    if (name.includes(sufix)) { name = name.replace(`-${sufix}`, '') }
     return name
   }
 

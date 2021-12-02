@@ -1,9 +1,9 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
 
-export const PokemonListContainer = styled.div`
+export const PokemonGroupContainer = styled.div`
   ${cardConfig}
-  grid-area: list;
+  grid-area: group;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -11,7 +11,7 @@ export const PokemonListContainer = styled.div`
   padding: 0 0 1em 0;
   max-height: 90vh;
 
-  .pokemon-list{
+  .pokemon__group{
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@ export const PokemonListContainer = styled.div`
     }
   }
 
-  .pokemon-list p{
+  .pokemon__group p{
     font-size: 1.1rem;
     text-align: center;
   }
