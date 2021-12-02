@@ -6,7 +6,7 @@ export const errorToastStyle = {
   border: `1px solid ${$errorColor}`,
   padding: '16px',
   color: `${$errorColor}`,
-  fontSize: '1.3em'
+  fontSize: '1.3rem'
 }
 
 export const SearchInputContainer = styled.div`
@@ -15,8 +15,8 @@ export const SearchInputContainer = styled.div`
   border-radius: 30px;
   display: flex;
   grid-area: search;
-  width: 30%;
-  
+  padding: .5rem;  
+
   .search__icon{
     display:grid;
     height: 100%;

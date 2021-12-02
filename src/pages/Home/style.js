@@ -1,20 +1,25 @@
 import styled from 'styled-components'
+import {
+  screen400px,
+  screen800px
+} from 'components/UI/responsive'
 
 export const HomeContainer = styled.main`
   display: grid;
   grid-area: home;
-  grid-template-columns: 17% 17% 17% auto;
-  grid-template-rows: 0 5% 23% 2% 20% 2% 20% 8% 0;
-  grid-template-areas: ". . . ."
-                       "search search search search"
-                       "main main main group"
-                       "title__evolution title__evolution title__evolution group"
-                       "evolution evolution evolution group"
-                       "title__type title__type title__type group"
-                       "type statsInfo statsInfo group"
-                       "footer footer footer group"
-                       ". . . .";
+  grid-template-columns: auto auto auto;
+  grid-template-rows:  5% 23% 2% 20% 2% 20% auto 8% ;
+  grid-template-areas: "search search search"
+                       "main main main"
+                       "title__evolution title__evolution title__evolution"
+                       "evolution evolution evolution"
+                       "title__type title__type title__type"
+                       "type statsInfo statsInfo"
+                       "group group group"
+                       "footer footer footer";
   gap: 20px;
-  margin-left: 3rem;
-  max-width: 88%;
+  margin: 1rem;
+
+  ${screen400px}
+  ${screen800px}
 `

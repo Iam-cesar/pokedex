@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   
   html{
     margin: 0 auto;
-    max-width: 1600px;
+    max-width: 1024px;
   }
   
   body{

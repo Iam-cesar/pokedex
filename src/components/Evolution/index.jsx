@@ -17,7 +17,7 @@ function Evolution () {
   }
 
   return (
-    <EvolutionContainer>
+    <EvolutionContainer className='evolution'>
       {pokemon.evolutions.map((item, index) => {
         return (
           item

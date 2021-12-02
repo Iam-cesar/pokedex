@@ -6,6 +6,7 @@ export const FooterContainer = styled.footer`
   ${cardConfig}
   display: grid;
   grid-area: footer;
+  padding: .5rem 0;
   place-items: center;
 
   a{
