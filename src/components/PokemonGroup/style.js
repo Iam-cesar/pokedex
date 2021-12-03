@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 export const PokemonGroupContainer = styled.div`
   ${cardConfig}
-  grid-area: group;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 export const StatsInfoContainer = styled.table`
   ${cardConfig}
-  grid-area: statsInfo;
   padding: .5rem 1rem;
+  width: 70%;
 
   tr > td {
     font-size: 1.1rem;

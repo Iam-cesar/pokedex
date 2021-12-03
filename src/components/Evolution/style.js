@@ -7,8 +7,8 @@ export const EvolutionContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  grid-area: evolution;
   padding: 1rem 0;
+  width: 50%;
   
   .evolutions__container{
     cursor: pointer;
@@ -21,11 +21,11 @@ export const EvolutionContainer = styled.div`
       justify-content: flex-end;
       
       h4{
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
       
       p{
-        font-size: 1rem;
+        font-size: .8rem;
       }
       
       img{
