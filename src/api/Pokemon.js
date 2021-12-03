@@ -6,6 +6,68 @@ class Pokemon {
     this.urlPokemonSpecies = 'https://pokeapi.co/api/v2/pokemon-species/'
   }
 
+  addSufixOn (name) {
+    const specialPokemons = {
+      incarnate: ['tornadus', 'thundurus', 'landorus'],
+      ordinary: ['keldeo'],
+      aria: ['meloetta'],
+      baile: ['oricorio'],
+      red: ['minior'],
+      altered: ['giratina'],
+      striped: ['basculin'],
+      average: ['gourgeist', 'pumpkaboo']
+    }
+    if (specialPokemons.incarnate.includes(name)) { name = `${name}-incarnate` }
+    if (specialPokemons.ordinary.includes(name)) { name = `${name}-ordinary` }
+    if (specialPokemons.aria.includes(name)) { name = `${name}-aria` }
+    if (specialPokemons.baile.includes(name)) { name = `${name}-baile` }
+    if (specialPokemons.red.includes(name)) { name = `${name}-red` }
+    if (specialPokemons.altered.includes(name)) { name = `${name}-altered` }
+    if (specialPokemons.striped.includes(name)) { name = `${name}-red-striped` }
+    if (specialPokemons.average.includes(name)) { name = `${name}-average` }
+    return name
+  }
+
+  async getBasicInformation (name) {
+    try {
+      if (name === '0') return
+      const response = await axios.get(`${this.urlPokemon}${this.addSufixOn(name)}`)
+      return response.data
+    } catch (err) {
+      return err
+    }
+  }
+
+  removeSufixOf (name) {
+    if (name.includes('incarnate')) { name = name.replace('-incarnate', '') }
+    if (name.includes('ordinary')) { name = name.replace('-ordinary', '') }
+    if (name.includes('aria')) { name = name.replace('-aria', '') }
+    if (name.includes('baile')) { name = name.replace('-baile', '') }
+    if (name.includes('red')) { name = name.replace('-red', '') }
+    if (name.includes('meteor')) { name = name.replace('-meteor', '') }
+    if (name.includes('altered')) { name = name.replace('-altered', '') }
+    if (name.includes('striped')) { name = name.replace('-striped', '') }
+    return name
+  }
+
+  async getSpecie (nameOrId) {
+    try {
+      const response = await axios.get(`${this.urlPokemonSpecies}${this.removeSufixOf(nameOrId)}`)
+      return response.data
+    } catch (err) {
+      return err
+    }
+  }
+
+  async getOneUrlOfEvolution (UrlChain) {
+    try {
+      const response = await axios.get(UrlChain)
+      return response.data
+    } catch (err) {
+      return err
+    }
+  }
+
   async getUrlChainEvolutionOffset () {
     const response = await axios.get(this.urlEvolutionChainOffset)
     return response.data.results
@@ -22,9 +84,9 @@ class Pokemon {
   }
 
   async getOne (nameOrId) {
-    const pokemonInfo = await this.getInformation(nameOrId)
+    const pokemonInfo = await this.getBasicInformation(nameOrId)
     if (!nameOrId) return
-    const pokemonSpecies = await this.getSpecies(pokemonInfo.id)
+    const pokemonSpecies = await this.getSpecie(pokemonInfo.name)
     const pokemonEvolutionChain = await this.getOneUrlOfEvolution(pokemonSpecies.evolution_chain.url)
     return { pokemonInfo, pokemonSpecies, pokemonEvolutionChain }
   }
@@ -40,11 +102,11 @@ class Pokemon {
 
   async getEvolutions (pokemonNames) {
     const evolutionNames = await this.getEvolutionNames(pokemonNames)
-    const container = []
+    const pokemonEvolutions = []
     await Promise.all(evolutionNames.map(async (item, index) => {
       if (!item) return
-      const res = await this.getInformation(item)
-      container.push({
+      const res = await this.getBasicInformation(item)
+      pokemonEvolutions.push({
         index,
         name: res.species?.name,
         urlSpecie: res.species?.url,
@@ -56,7 +118,7 @@ class Pokemon {
         abilities: res.abilities
       })
     }))
-    return container.sort((a, b) => (a.index > b.index) ? 1 : -1)
+    return pokemonEvolutions.sort((a, b) => (a.index > b.index) ? 1 : -1)
   }
 
   async getAllInformation (nameOrId) {
@@ -72,79 +134,6 @@ class Pokemon {
       stats: pokemonInfo.stats,
       abilities: pokemonInfo.abilities,
       evolutions: evolutions
-    }
-  }
-
-  addSufixOn (name, specialName, sufix) {
-    if (specialName.includes(name)) { name = `${name}${sufix}` }
-    return name
-  }
-
-  treatAddSufixOn (name) {
-    const specialPokemons = {
-      incarnate: ['tornadus', 'thundurus', 'landorus'],
-      ordinary: ['keldeo'],
-      aria: ['meloetta'],
-      baile: ['oricorio'],
-      red: ['minior'],
-      altered: ['giratina'],
-      striped: ['basculin'],
-      average: ['gourgeist', 'pumpkaboo']
-    }
-    this.addSufixOn(name, specialPokemons.incarnate, '-incarnate')
-    this.addSufixOn(name, specialPokemons.ordinary, '-ordinary')
-    this.addSufixOn(name, specialPokemons.aria, '-aria')
-    this.addSufixOn(name, specialPokemons.baile, '-baile')
-    this.addSufixOn(name, specialPokemons.red, '-red')
-    this.addSufixOn(name, specialPokemons.altered, '-altered')
-    this.addSufixOn(name, specialPokemons.striped, '-red-striped')
-    this.addSufixOn(name, specialPokemons.average, '-average')
-
-    return name
-  }
-
-  removeSufixOf(name, sufix) {
-    if (name.includes(sufix)) { name = name.replace(`-${sufix}`, '') }
-    return name
-  }
-
-  treatRemoveSufixOf (name) {
-    this.removeSufixOf(name, 'incarnate')
-    this.removeSufixOf(name, 'ordinary')
-    this.removeSufixOf(name, 'aria')
-    this.removeSufixOf(name, 'baile')
-    this.removeSufixOf(name, 'red')
-    this.removeSufixOf(name, 'meteor')
-    this.removeSufixOf(name, 'altered')
-    this.removeSufixOf(name, 'striped')
-    return name
-  }
-
-  async getInformation (name) {
-    try {
-      if (name === '0') return
-      const response = await axios.get(`${this.urlPokemon}${this.treatAddSufixOn(name)}`)
-      return response.data
-    } catch (err) {
-      return err
-    }
-  }
-
-  async getOneUrlOfEvolution (UrlChain) {
-    try {
-      const response = await axios.get(UrlChain)
-      return response.data
-    } catch (err) {
-      return err
-    }
-  }
-
-  async getSpecies (param) {
-    try {
-      const response = await axios.get(`${this.urlPokemonSpecies}${param}`)
-      return response.data
-    } catch (err) {
-      return err
     }
   }
 }

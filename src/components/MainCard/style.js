@@ -5,7 +5,7 @@ export const MainCardContainer = styled.div`
   ${cardConfig}
   background-color: rgba(242, 242, 242, .2);
   display: flex;
-  grid-area: main;
+  width: 50%;
 
   .main__card__title{
     display: flex;
@@ -14,7 +14,7 @@ export const MainCardContainer = styled.div`
     width: 50%;
 
     h1{
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
 

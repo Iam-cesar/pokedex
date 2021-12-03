@@ -6,7 +6,7 @@ export const PokemonTypeContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  grid-area: type;
+  width: 30%;
 
   .pokemon__type--container,
   .pokemon__type--double--container{
