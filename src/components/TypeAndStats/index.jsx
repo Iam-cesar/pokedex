@@ -2,11 +2,11 @@ import React from 'react'
 import PokemonType from 'components/PokemonType'
 import StatsInfo from 'components/StatsInfo'
 import Title from 'components/Title'
-import { TypesAndStatsContainer } from './style'
+import { TypeAndStatsContainer } from './style'
 
-function TypesAndStats () {
+function TypeAndStats () {
   return (
-    <TypesAndStatsContainer>
+    <TypeAndStatsContainer>
       <Title
         HtmlSize='h3'
         className='title__type'
@@ -16,8 +16,8 @@ function TypesAndStats () {
         <PokemonType />
         <StatsInfo />
       </div>
-    </TypesAndStatsContainer>
+    </TypeAndStatsContainer>
   )
 }
 
-export default TypesAndStats
+export default TypeAndStats
