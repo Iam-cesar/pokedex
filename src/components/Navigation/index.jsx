@@ -9,7 +9,7 @@ function Navigation () {
       <IconImg
         className='nav__icon'
         img={searchIcon}
-        alt='alt'
+        alt='logotipo pokebola'
       />
       <nav>
         <h1>Pokedex</h1>
