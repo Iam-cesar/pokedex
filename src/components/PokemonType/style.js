@@ -1,5 +1,6 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
+import { typesAndStats450px } from 'components/UI/responsive'
 
 export const PokemonTypeContainer = styled.div`
   ${cardConfig}
@@ -41,4 +42,6 @@ export const PokemonTypeContainer = styled.div`
       border-radius: 0 0 15px 15px;
     }
   }
+
+  ${typesAndStats450px}
 `
