@@ -1,5 +1,6 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
+import { mainCardTitle450px } from 'components/UI/responsive'
 
 export const MainCardContainer = styled.div`
   ${cardConfig}
@@ -16,6 +17,8 @@ export const MainCardContainer = styled.div`
     h1{
       font-size: 2rem;
     }
+
+    ${mainCardTitle450px}
   }
 
   .main__card__img{
