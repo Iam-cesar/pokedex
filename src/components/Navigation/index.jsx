@@ -11,9 +11,9 @@ function Navigation () {
         img={searchIcon}
         alt='logotipo pokebola'
       />
-      <nav>
+      <div>
         <h1>Pokedex</h1>
-      </nav>
+      </div>
     </NavContainer>
   )
 }

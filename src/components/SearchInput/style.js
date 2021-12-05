@@ -15,7 +15,7 @@ export const SearchInputContainer = styled.div`
   border-radius: 30px;
   display: flex;
   padding: .5rem;  
-
+  max-width: 500px;
   .search__icon{
     display:grid;
     height: 100%;

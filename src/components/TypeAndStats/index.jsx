@@ -1,5 +1,5 @@
 import React from 'react'
-import PokemonType from 'components/PokemonType'
+import PokemonType from 'components/Type'
 import StatsInfo from 'components/StatsInfo'
 import Title from 'components/Title'
 import { TypeAndStatsContainer } from './style'

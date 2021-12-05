@@ -1,5 +1,6 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
+import { statsInfo450px } from 'components/UI/responsive'
 
 export const StatsInfoContainer = styled.table`
   ${cardConfig}
@@ -13,4 +14,6 @@ export const StatsInfoContainer = styled.table`
   .pokemon__info__stats__number{
     text-align: end;
   }
+
+  ${statsInfo450px}
 `
