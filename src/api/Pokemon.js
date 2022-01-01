@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 class Pokemon {
   constructor() {
     this.urlEvolutionChainOffset = 'https://pokeapi.co/api/v2/evolution-chain/?offset=0&limit=30'
@@ -92,12 +93,11 @@ class Pokemon {
   }
 
   async getEvolutionNames (pokemonEvolutionChain) {
-    const pokemonEvolutionNames = [
+    return [
       pokemonEvolutionChain.chain?.species.name || '',
       pokemonEvolutionChain.chain?.evolves_to[0]?.species.name || '',
       pokemonEvolutionChain.chain?.evolves_to[0]?.evolves_to[0]?.species.name || ''
     ]
-    return pokemonEvolutionNames
   }
 
   async getEvolutions (pokemonNames) {
