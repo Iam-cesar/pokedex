@@ -12,13 +12,13 @@ function Evolution () {
   }, [pokemon.evolutions])
 
   function handleMainCardWithSelectedFromEvolution (data, index) {
-    const container = Object.assign(data[index], { evolutions: pokemon.evolutions })
-    setPokemon(container)
+    const newPokemonInMainCard = Object.assign(data[index], { evolutions: pokemon.evolutions })
+    setPokemon(newPokemonInMainCard)
   }
 
   return (
     <EvolutionContainer className='evolution'>
-      {pokemon.evolutions.map((item, index) => {
+      {evolutions.map((item, index) => {
         return (
           item
             ? <a

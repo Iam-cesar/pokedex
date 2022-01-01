@@ -9,7 +9,6 @@ function MainContent () {
       <MainCard />
       <Evolution />
     </MainContentContainer>
-
   )
 }
 
