@@ -1,18 +1,26 @@
-class Pokemon {
-  constructor() {
+class PokemonModel {
+  constructor(
+    name = '',
+    urlSpecie = '',
+    id = 0,
+    image = '',
+    imgAnimated = '',
+    types = [],
+    stats = [],
+    evolutions = []
+  ) {
     this.index = 0
-    this.name = ''
-    this.urlSpecie = ''
-    this.id = ''
-    this.image = ''
-    this.imgAnimated = ''
-    this.type = []
-    this.stats = []
-    this.abilities = []
-    this.evolutionNames = []
-    this.evolutions = []
+    this.name = name
+    this.urlSpecie = urlSpecie
+    this.id = id
+    this.image = image
+    this.imgAnimated = imgAnimated
+    this.type = types
+    this.stats = stats
+    this.evolutions = evolutions
     this.evolutionChain = ''
+    this.group = []
   }
 }
 
-export default Pokemon
+export default PokemonModel
