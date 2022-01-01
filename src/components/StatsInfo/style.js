@@ -1,6 +1,13 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
-import { statsInfo450px } from 'components/UI/responsive'
+
+export const statsInfo = `
+  @media screen and (max-width: 450px){
+    tr > td {
+      font-size: .9rem !important;
+    }
+  }
+`
 
 export const StatsInfoContainer = styled.table`
   ${cardConfig}
@@ -15,5 +22,5 @@ export const StatsInfoContainer = styled.table`
     text-align: end;
   }
 
-  ${statsInfo450px}
+  ${statsInfo}
 `

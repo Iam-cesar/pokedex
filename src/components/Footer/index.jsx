@@ -5,7 +5,7 @@ function Footer () {
   return (
     <FooterContainer>
       <p>Code and designed by
-        <a href="https://github.com/cesar-abj"
+        <a href="https://github.com/iamdevcesar"
           target='_blank' rel="noreferrer"
         > Cesar Augusto</a>
       </p>

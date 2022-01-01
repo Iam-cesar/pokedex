@@ -1,17 +1,29 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
 
-export const PokemonGroupContainer = styled.div`
+export const PokemonGroupContainer = styled.section`
   ${cardConfig}
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 0 .5rem 1rem .5rem;
 
-  .pokemon__group{
-    align-items: center;
+  .group__loader{
+    height: 40vh;
+    width: 100%;
+  }
+
+  ul{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0 .5rem 1rem .5rem;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  li > a > .pokemon__group{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 
     :hover{
       cursor: pointer;

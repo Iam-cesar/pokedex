@@ -1,5 +1,19 @@
 import styled from 'styled-components'
-import { navContainer450px } from 'components/UI/responsive'
+
+export const navContainer = `
+  @media screen and (max-width: 450px){
+    gap: 0;
+
+    h1{
+      font-size: 1.5rem;
+    }
+
+    img{
+      width: 80%;
+    }
+  }
+`
+
 export const NavContainer = styled.nav`
   align-items: center;
   display: flex;
@@ -9,5 +23,5 @@ export const NavContainer = styled.nav`
     font-size: 2rem;
   }
   
-  ${navContainer450px}
+  ${navContainer}
 `
