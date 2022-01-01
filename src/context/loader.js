@@ -1,7 +1,7 @@
 import React, { useState, createContext } from 'react'
 import PropTypes from 'prop-types'
 
-export const LoaderContext = createContext({})
+export const LoaderContext = createContext()
 LoaderContext.displayName = 'Loader'
 LoaderProvider.propTypes = {
   children: PropTypes.node
