@@ -1,6 +1,14 @@
 import { cardConfig } from 'components/UI/mixins'
 import styled from 'styled-components'
-import { typesAndStats450px } from 'components/UI/responsive'
+
+export const typesResponsivity = `
+  @media screen and (max-width: 450px){
+    .pokemon__type__container div p,
+    .pokemon__type__double__container div p{
+      font-size: 1rem !important;
+    }
+  }
+`
 
 export const PokemonTypeContainer = styled.div`
   ${cardConfig}
@@ -9,8 +17,13 @@ export const PokemonTypeContainer = styled.div`
   flex-direction: column;
   width: 30%;
 
-  .pokemon__type--container,
-  .pokemon__type--double--container{
+  .loader__type{
+    height: 15vh;
+    width: 100%;
+  }
+
+  .pokemon__type__container,
+  .pokemon__type__double__container{
     align-items: center;
     border-radius: 15px;
     display: flex;
@@ -34,7 +47,7 @@ export const PokemonTypeContainer = styled.div`
     }
   }
 
-  .pokemon__type--double--container{
+  .pokemon__type__double__container{
     :nth-child(1n){
       border-radius: 15px 15px 0 0;
     }
@@ -43,5 +56,5 @@ export const PokemonTypeContainer = styled.div`
     }
   }
 
-  ${typesAndStats450px}
+  ${typesResponsivity}
 `

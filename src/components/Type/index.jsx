@@ -20,16 +20,19 @@ import psychic from 'assets/pokemonTypes/psychic.png'
 import rock from 'assets/pokemonTypes/rock.png'
 import steel from 'assets/pokemonTypes/steel.png'
 import water from 'assets/pokemonTypes/water.png'
+import Loader from 'components/Loader'
+import { useLoader } from 'hooks/useLoader'
 
 function PokemonType () {
   const { pokemon } = usePokemon()
   const [pokemonType, setPokemonType] = useState([])
+  const { loader } = useLoader()
 
   useEffect(() => {
     setPokemonType(pokemon.type)
   }, [pokemon.type])
 
-  function handleTranslate(name) {
+  function translateTypeName (name) {
     const names = {
       bug: 'Inseto',
       dark: 'Noturno',
@@ -79,20 +82,19 @@ function PokemonType () {
 
   return (
     <PokemonTypeContainer>
-      {pokemonType.map((item, index) => {
-        const pokemon = handleTypesIcons(item.type.name)
-        const translatedName = handleTranslate(item.type.name)
-        return (
-          <div
+      {loader
+        ? <Loader className='loader__type' />
+        : pokemonType.map((item, index) => {
+          const pokemon = handleTypesIcons(item.type.name)
+          const translatedName = translateTypeName(item.type.name)
+          return <div
             key={index}
             className={
               pokemonType.length === 2
-                ? 'pokemon__type--double--container'
-                : 'pokemon__type--container'
+                ? 'pokemon__type__double__container'
+                : 'pokemon__type__container'
             }
-            style={{
-              backgroundColor: pokemon.color
-            }}
+            style={{ backgroundColor: pokemon.color }}
           >
             <div >
               <img
@@ -102,8 +104,7 @@ function PokemonType () {
               <p>{translatedName}</p>
             </div>
           </div>
-        )
-      })}
+        })}
     </PokemonTypeContainer>
   )
 }

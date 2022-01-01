@@ -7,18 +7,21 @@ import Footer from 'components/Footer'
 import PokemonGroup from 'components/Group'
 import MainContent from 'components/MainContent/index'
 import Navigation from 'components/Navigation'
+import { LoaderProvider } from 'context/loader'
 
 function Home () {
   return (
     <PokemonProvider>
-      <HomeContainer>
-        <Navigation />
-        <SearchInput />
-        <MainContent />
-        <TypeAndStats />
-        <PokemonGroup />
-        <Footer />
-      </HomeContainer>
+      <LoaderProvider>
+        <HomeContainer>
+          <Navigation />
+          <SearchInput />
+          <MainContent />
+          <TypeAndStats />
+          <PokemonGroup />
+          <Footer />
+        </HomeContainer>
+      </LoaderProvider>
     </PokemonProvider>
   )
 }

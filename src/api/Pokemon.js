@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import PokemonModel from 'model/Pokemon'
 class Pokemon {
   constructor() {
     this.urlEvolutionChainOffset = 'https://pokeapi.co/api/v2/evolution-chain/?offset=0&limit=30'
@@ -74,14 +74,14 @@ class Pokemon {
     return response.data.results
   }
 
-  async getGroup () {
+  async getGroupNames () {
     const allUrls = await this.getUrlChainEvolutionOffset()
-    const group = []
+    const instancePokemon = new PokemonModel()
     await Promise.all(allUrls.map(async (item) => {
       const oneUrl = await this.getOneUrlOfEvolution(item.url)
-      group.push(oneUrl.chain?.species.name)
+      instancePokemon.group.push(oneUrl.chain?.species.name)
     }))
-    return group
+    return instancePokemon.group
   }
 
   async getOne (nameOrId) {
@@ -102,11 +102,11 @@ class Pokemon {
 
   async getEvolutions (pokemonNames) {
     const evolutionNames = await this.getEvolutionNames(pokemonNames)
-    const pokemonEvolutions = []
+    const instancePokemon = new PokemonModel()
     await Promise.all(evolutionNames.map(async (item, index) => {
       if (!item) return
       const res = await this.getBasicInformation(item)
-      pokemonEvolutions.push({
+      instancePokemon.evolutions.push({
         index,
         name: res.species?.name,
         urlSpecie: res.species?.url,
@@ -114,27 +114,26 @@ class Pokemon {
         image: res.sprites?.front_default,
         imgAnimated: res?.sprites.versions['generation-v']['black-white'].animated?.front_default,
         type: res.types,
-        stats: res.stats,
-        abilities: res.abilities
+        stats: res.stats
       })
     }))
-    return pokemonEvolutions.sort((a, b) => (a.index > b.index) ? 1 : -1)
+    return instancePokemon.evolutions.sort((a, b) => (a.index > b.index) ? 1 : -1)
   }
 
   async getAllInformation (nameOrId) {
     const { pokemonInfo, pokemonEvolutionChain } = await this.getOne(nameOrId)
     const evolutions = await this.getEvolutions(pokemonEvolutionChain)
-    return {
-      name: pokemonInfo.species?.name,
-      urlSpecie: pokemonInfo.species?.url,
-      id: pokemonInfo.id,
-      image: pokemonInfo.sprites?.front_default,
-      imgAnimated: pokemonInfo?.sprites.versions['generation-v']['black-white'].animated?.front_default,
-      type: pokemonInfo.types,
-      stats: pokemonInfo.stats,
-      abilities: pokemonInfo.abilities,
-      evolutions: evolutions
-    }
+    const pokemon = new PokemonModel(
+      pokemonInfo.species?.name,
+      pokemonInfo.species?.url,
+      pokemonInfo.id,
+      pokemonInfo.sprites?.front_default,
+      pokemonInfo?.sprites.versions['generation-v']['black-white'].animated?.front_default,
+      pokemonInfo.types,
+      pokemonInfo.stats,
+      evolutions
+    )
+    return pokemon
   }
 }
 

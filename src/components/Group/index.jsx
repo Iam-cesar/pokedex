@@ -1,43 +1,50 @@
+import React, { useContext, useEffect, useState } from 'react'
 import { PokemonGroupContainer } from './style'
-import React, { useEffect, useState } from 'react'
-import Pokemon from 'api/Pokemon'
 import { usePokemon } from 'hooks/usePokemon'
+import Pokemon from 'api/Pokemon'
 import pokeball from 'assets/svg/pokeball.svg'
+import PokemonModel from 'model/Pokemon'
+import { LoaderContext } from 'context/loader'
+import Loader from 'components/Loader'
 
 function PokemonGroup () {
   const { setPokemon } = usePokemon()
   const [pokemonGroup, setPokemonGroup] = useState([])
   const Apipokemon = new Pokemon()
+  const { loader, setLoader } = useContext(LoaderContext)
 
   useEffect(() => {
     handlePokemonsGroup()
   }, [])
 
   async function handlePokemonsGroup () {
-    const res = await Apipokemon.getGroup()
-    const container = []
+    const res = await Apipokemon.getGroupNames()
+    const group = new PokemonModel().group
     await Promise.all(res.map(async (item) => {
       const pokemon = await Apipokemon.getAllInformation(item)
-      container.push(pokemon)
-    }))
-    setPokemonGroup(container)
+      group.push(pokemon)
+    })).then(setPokemonGroup(group))
+    setLoader(false)
   }
 
   return (
     <PokemonGroupContainer>
-      {pokemonGroup.map((item, index) => {
-        return (
-          <a
-            key={index}
-            onClick={() => setPokemon(pokemonGroup[index])}
-          >
-            <div className='pokemon__group'>
-              <img src={item.image || pokeball} alt={item.name} />
-              <p>{item.name}</p>
-            </div>
-          </a>
-        )
-      })}
+      {loader
+        ? <Loader className='group__loader' />
+        : <ul>{pokemonGroup.map((item, index) => {
+          return (
+            <li key={index}>
+              <a
+                onClick={() => setPokemon(pokemonGroup[index])}
+              >
+                <div className='pokemon__group'>
+                  <img src={item.image || pokeball} alt={item.name} />
+                  <p>{item.name}</p>
+                </div>
+              </a>
+            </li>
+          )
+        })}</ul>}
     </PokemonGroupContainer>
   )
 }
