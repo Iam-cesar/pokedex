@@ -1,7 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import {
-  $white
-} from './colors'
+import { $white } from './colors'
 
 export const GlobalStyle = createGlobalStyle`
   *{

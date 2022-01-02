@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
+
 import { PokemonGroupContainer } from './style'
-import { usePokemon } from 'hooks/usePokemon'
-import Pokemon from 'api/Pokemon'
 import pokeball from 'assets/svg/pokeball.svg'
+
 import PokemonModel from 'model/Pokemon'
+import Pokemon from 'api/Pokemon'
+import { usePokemon } from 'hooks/usePokemon'
+
 import { LoaderContext } from 'context/loader'
 import Loader from 'components/Loader'
 

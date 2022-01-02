@@ -1,8 +1,10 @@
-import { MainCardContainer } from './style'
 import React from 'react'
+
 import IconImg from 'components/IconImg'
-import { usePokemon } from 'hooks/usePokemon'
+import { MainCardContainer } from './style'
 import { stylingPokemonId } from 'components/UI/mixins'
+
+import { usePokemon } from 'hooks/usePokemon'
 import Loader from 'components/Loader'
 
 function MainCard () {

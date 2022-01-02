@@ -1,7 +1,7 @@
-import { PokemonTypeContainer } from './style'
 import React, { useEffect, useState } from 'react'
-import { usePokemon } from 'hooks/usePokemon'
-import { pokemonColorTypes } from 'components/UI/colors'
+
+import { PokemonTypeContainer } from './style'
+
 import bug from 'assets/pokemonTypes/bug.png'
 import dark from 'assets/pokemonTypes/dark.png'
 import dragon from 'assets/pokemonTypes/dragon.png'
@@ -20,8 +20,12 @@ import psychic from 'assets/pokemonTypes/psychic.png'
 import rock from 'assets/pokemonTypes/rock.png'
 import steel from 'assets/pokemonTypes/steel.png'
 import water from 'assets/pokemonTypes/water.png'
+import { pokemonColorTypes } from 'components/UI/colors'
+
 import Loader from 'components/Loader'
 import { useLoader } from 'hooks/useLoader'
+
+import { usePokemon } from 'hooks/usePokemon'
 
 function PokemonType () {
   const { pokemon } = usePokemon()

@@ -1,5 +1,7 @@
-import { StatsInfoContainer } from './style'
 import React, { useEffect, useState } from 'react'
+
+import { StatsInfoContainer } from './style'
+
 import { usePokemon } from 'hooks/usePokemon'
 
 function StatsInfo () {
