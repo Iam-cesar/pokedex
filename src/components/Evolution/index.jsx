@@ -1,5 +1,7 @@
-import { usePokemon } from 'hooks/usePokemon'
 import React, { useEffect, useState } from 'react'
+
+import { usePokemon } from 'hooks/usePokemon'
+
 import { EvolutionContainer } from './style'
 import { stylingPokemonId } from 'components/UI/mixins'
 

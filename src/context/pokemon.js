@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Pokemon from 'model/Pokemon'
 
 export const PokemonContext = createContext()
+
 PokemonContext.displayName = 'Pokemon'
 PokemonProvider.propTypes = {
   children: PropTypes.node

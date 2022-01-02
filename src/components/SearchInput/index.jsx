@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
-import { SearchInputContainer, errorToastStyle } from './style'
-import { PokemonContext } from 'context/pokemon'
-import toast, { Toaster } from 'react-hot-toast'
+
 import IconImg from 'components/IconImg'
 import searchIcon from 'assets/svg/search_icon.svg'
+import { SearchInputContainer, errorToastStyle } from './style'
+
 import Pokemon from 'api/Pokemon'
+import toast, { Toaster } from 'react-hot-toast'
+import { PokemonContext } from 'context/pokemon'
 
 function SearchInput () {
   const {
@@ -35,8 +37,8 @@ function SearchInput () {
   }
 
   function notify () {
-    toast('Pokemon não encontrado')
     setSearchText('')
+    toast('Pokemon não encontrado')
   }
 
   function initialFetch () {

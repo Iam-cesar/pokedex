@@ -1,6 +1,6 @@
-import { TitleContainer } from './style'
 import React from 'react'
 import PropTypes from 'prop-types'
+import { TitleContainer } from './style'
 
 Title.propTypes = {
   HtmlSize: PropTypes.string,

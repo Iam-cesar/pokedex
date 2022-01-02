@@ -1,5 +1,6 @@
 import axios from 'axios'
 import PokemonModel from 'model/Pokemon'
+
 class Pokemon {
   constructor() {
     this.urlEvolutionChainOffset = 'https://pokeapi.co/api/v2/evolution-chain/?offset=0&limit=30'
