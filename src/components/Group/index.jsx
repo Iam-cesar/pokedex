@@ -1,40 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { PokemonGroupContainer } from './style'
 import pokeball from 'assets/svg/pokeball.svg'
 
-import PokemonModel from 'model/Pokemon'
+// import PokemonModel from 'model/Pokemon'
 import Pokemon from 'api/Pokemon'
 import { usePokemon } from 'hooks/usePokemon'
 
-import { LoaderContext } from 'context/loader'
 import Loader from 'components/Loader'
 
 function PokemonGroup () {
+  const pokemon = new Pokemon()
   const { setPokemon } = usePokemon()
   const [pokemonGroup, setPokemonGroup] = useState([])
-  const Apipokemon = new Pokemon()
-  const { loader, setLoader } = useContext(LoaderContext)
 
   useEffect(() => {
     handlePokemonsGroup()
   }, [])
 
   async function handlePokemonsGroup () {
-    const res = await Apipokemon.getGroupNames()
-    const group = new PokemonModel().group
-    await Promise.all(res.map(async (item) => {
-      const pokemon = await Apipokemon.getAllInformation(item)
-      group.push(pokemon)
-    })).then(setPokemonGroup(group))
-    setLoader(false)
+    const data = await pokemon.getGroup()
+
+    setPokemonGroup(data)
   }
 
   return (
     <PokemonGroupContainer>
-      {loader
-        ? <Loader className='group__loader' />
-        : <ul>{pokemonGroup.map((item, index) => {
+      {<Loader className='group__loader' /> &&
+        <ul>{pokemonGroup.map((item, index) => {
           return (
             <li key={index}>
               <a

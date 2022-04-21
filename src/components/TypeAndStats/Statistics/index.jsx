@@ -4,7 +4,7 @@ import { StatsInfoContainer } from './style'
 
 import { usePokemon } from 'hooks/usePokemon'
 
-function StatsInfo () {
+function Statistics () {
   const { pokemon } = usePokemon()
   const [stats, setStats] = useState([])
 
@@ -40,4 +40,4 @@ function StatsInfo () {
   )
 }
 
-export default StatsInfo
+export default Statistics

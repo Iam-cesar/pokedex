@@ -13,7 +13,7 @@ function IconImg ({ img, alt, className }) {
     <IconImgContainer
       className={className}
     >
-      <img src={img} alt={alt} />
+      <img data-testid="logo-image-pokeball" src={img} alt={alt} />
     </IconImgContainer>
   )
 }

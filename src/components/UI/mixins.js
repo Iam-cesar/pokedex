@@ -6,6 +6,7 @@ export const cardConfig = `
   `
 export function stylingPokemonId (id) {
   if (!id) { return }
+
   return id < 10
     ? `#00${id}`
     : id < 100
