@@ -1,6 +1,6 @@
-import React, { createContext, useState } from 'react'
-import PropTypes from 'prop-types'
 import Pokemon from 'model/Pokemon'
+import PropTypes from 'prop-types'
+import React, { createContext, useState } from 'react'
 
 export const PokemonContext = createContext()
 

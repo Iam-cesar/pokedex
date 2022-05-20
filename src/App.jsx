@@ -1,6 +1,6 @@
-import React from 'react'
 import { GlobalStyle } from 'components/UI/GlobalStyle'
 import Home from 'pages/Home'
+import React from 'react'
 
 function App () {
   return (

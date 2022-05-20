@@ -1,8 +1,7 @@
-import React from 'react'
-
-import IconImg from 'components/IconImg'
-import { NavContainer } from './style'
 import searchIcon from 'assets/svg/pokeball.svg'
+import IconImg from 'components/IconImg'
+import React from 'react'
+import { NavContainer } from './style'
 
 function Navigation () {
   return (

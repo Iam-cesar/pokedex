@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-
-import { usePokemon } from 'hooks/usePokemon'
-
-import { EvolutionContainer } from './style'
 import { stylingPokemonId } from 'components/UI/mixins'
+import { usePokemon } from 'hooks/usePokemon'
+import React, { useCallback, useEffect, useState } from 'react'
+import { EvolutionContainer } from './style'
 
 function Evolution () {
   const { pokemon, setPokemon } = usePokemon()
@@ -13,10 +11,10 @@ function Evolution () {
     setEvolutions(pokemon.evolutions)
   }, [pokemon.evolutions])
 
-  function handleMainCardWithSelectedFromEvolution (data, index) {
+  const handleMainCardSelectedEvolution = useCallback((data, index) => {
     const newPokemonInMainCard = Object.assign(data[index], { evolutions: pokemon.evolutions })
     setPokemon(newPokemonInMainCard)
-  }
+  })
 
   return (
     <EvolutionContainer className='evolution'>
@@ -25,7 +23,7 @@ function Evolution () {
           item
             ? <a
               key={index}
-              onClick={() => handleMainCardWithSelectedFromEvolution(evolutions, index)}
+              onClick={() => handleMainCardSelectedEvolution(evolutions, index)}
               className='evolutions__container'
             >
               <div key={item.index} className='evolution__item'>

@@ -1,9 +1,7 @@
-import React from 'react'
-
-import PokemonType from 'components/TypeAndStats/Type'
-import StatsInfo from 'components/TypeAndStats/Statistics'
 import Title from 'components/Navigation/Title'
-
+import StatsInfo from 'components/TypeAndStats/Statistics'
+import PokemonType from 'components/TypeAndStats/Type'
+import React from 'react'
 import { TypeAndStatsContainer } from './style'
 
 function TypeAndStats () {

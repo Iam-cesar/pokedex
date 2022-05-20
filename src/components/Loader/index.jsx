@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { LoaderContainer } from './style'
-import PropTypes from 'prop-types'
 
 Loader.propTypes = {
   className: PropTypes.string

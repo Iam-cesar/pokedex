@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
-
-import IconImg from 'components/IconImg'
-import searchIcon from 'assets/svg/search_icon.svg'
-import { SearchInputContainer, errorToastStyle } from './style'
-
 import Pokemon from 'api/Pokemon'
-import toast, { Toaster } from 'react-hot-toast'
+import searchIcon from 'assets/svg/search_icon.svg'
+import IconImg from 'components/IconImg'
 import { PokemonContext } from 'context/pokemon'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
+import { errorToastStyle, SearchInputContainer } from './style'
 
 function SearchInput () {
   const {
@@ -14,7 +12,7 @@ function SearchInput () {
     setPokemon
   } = useContext(PokemonContext)
 
-  const Apipokemon = new Pokemon()
+  const Api = new Pokemon()
   const [searchText, setSearchText] = useState('')
   const searchInputRef = useRef('')
 
@@ -27,18 +25,18 @@ function SearchInput () {
     setSearchText('')
   }, [pokemon])
 
-  async function handleFetchPokemon (nameOrId) {
+  const handleFetchPokemon = useCallback(async (nameOrId) => {
     try {
-      const response = await Apipokemon.getAllInformation(nameOrId)
+      const response = await Api.getAllInformation(nameOrId)
       setPokemon(response)
     } catch (err) {
       notify()
     }
-  }
+  })
 
   function notify () {
     setSearchText('')
-    toast('Pokemon não encontrado')
+    toast('Pokemon não encontrado !')
   }
 
   function initialFetch () {
@@ -46,13 +44,13 @@ function SearchInput () {
     handleFetchPokemon(randomPokemonId)
   }
 
-  function handleSearchPokemon (event) {
+  const handleSearchPokemon = useCallback((event) => {
     event.preventDefault()
     if (!searchText) toast('Insira um nome para pesquisa')
     if (searchText === '0') toast('Não existe pokemon com Id zero :[')
 
     handleFetchPokemon(searchText)
-  }
+  })
 
   function clearElement (element) {
     element.current = ''

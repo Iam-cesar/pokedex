@@ -1,13 +1,6 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { TitleContainer } from './style'
-
-Title.propTypes = {
-  HtmlSize: PropTypes.string,
-  text: PropTypes.string,
-  style: PropTypes.object,
-  className: PropTypes.string
-}
 
 function Title ({ HtmlSize, text, style, className }) {
   return (
@@ -19,6 +12,13 @@ function Title ({ HtmlSize, text, style, className }) {
       </HtmlSize>
     </TitleContainer>
   )
+}
+
+Title.propTypes = {
+  HtmlSize: PropTypes.string,
+  text: PropTypes.string,
+  style: PropTypes.object,
+  className: PropTypes.string
 }
 
 export default Title

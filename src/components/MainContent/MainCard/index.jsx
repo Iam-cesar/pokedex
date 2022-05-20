@@ -1,11 +1,9 @@
-import React from 'react'
-
 import IconImg from 'components/IconImg'
-import { MainCardContainer } from './style'
-import { stylingPokemonId } from 'components/UI/mixins'
-
-import { usePokemon } from 'hooks/usePokemon'
 import Loader from 'components/Loader'
+import { stylingPokemonId } from 'components/UI/mixins'
+import { usePokemon } from 'hooks/usePokemon'
+import React from 'react'
+import { MainCardContainer } from './style'
 
 function MainCard () {
   const { pokemon } = usePokemon()

@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import translateTypeNames from './util/translateTypeNames'
-import handleTypeIcons from './util/handleTypeIcons'
-import { PokemonTypeContainer } from './style'
-
 import Loader from 'components/Loader'
-
 import { usePokemon } from 'hooks/usePokemon'
+import React, { useEffect, useState } from 'react'
+import { PokemonTypeContainer } from './style'
+import handleTypeIcons from './utils/handleTypeIcons'
+import translateTypeNames from './utils/translateTypeNames'
 
 function PokemonType () {
   const { pokemon } = usePokemon()
@@ -15,19 +13,22 @@ function PokemonType () {
     setPokemonType(pokemon.type)
   }, [pokemon.type])
 
+  function handleClassnameContainer(length) {
+    return length === 2
+      ? 'pokemon__type__double__container'
+      : 'pokemon__type__container'
+  }
+
   return (
     <PokemonTypeContainer>
       {<Loader className='loader__type' /> &&
         pokemonType.map((item, index) => {
           const pokemon = handleTypeIcons(item.type.name)
           const translatedName = translateTypeNames(item.type.name)
+
           return <div
             key={index}
-            className={
-              pokemonType.length === 2
-                ? 'pokemon__type__double__container'
-                : 'pokemon__type__container'
-            }
+            className={ handleClassnameContainer(pokemonType.length) }
             style={{ backgroundColor: pokemon.color }}
           >
             <div >

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
-
-import { StatsInfoContainer } from './style'
-
 import { usePokemon } from 'hooks/usePokemon'
+import React, { useEffect, useState } from 'react'
+import { StatsInfoContainer } from './style'
+import handleTranslate from './utils/handleTranslate'
 
 function Statistics () {
   const { pokemon } = usePokemon()
@@ -11,18 +10,6 @@ function Statistics () {
   useEffect(() => {
     setStats(pokemon.stats)
   }, [pokemon.stats])
-
-  function handleTranslate (statsName) {
-    const stats = {
-      hp: 'Vida',
-      attack: 'Ataque',
-      defense: 'Defesa',
-      'special-attack': 'Ataque especial',
-      'special-defense': 'Defesa especial',
-      speed: 'Velocidade'
-    }
-    return stats[statsName]
-  }
 
   return (
     <StatsInfoContainer>

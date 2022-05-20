@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
-
-import { PokemonGroupContainer } from './style'
-import pokeball from 'assets/svg/pokeball.svg'
-
-// import PokemonModel from 'model/Pokemon'
 import Pokemon from 'api/Pokemon'
-import { usePokemon } from 'hooks/usePokemon'
-
+import pokeball from 'assets/svg/pokeball.svg'
 import Loader from 'components/Loader'
+import { usePokemon } from 'hooks/usePokemon'
+import React, { useCallback, useEffect, useState } from 'react'
+import { PokemonGroupContainer } from './style'
 
 function PokemonGroup () {
   const pokemon = new Pokemon()
@@ -18,11 +14,11 @@ function PokemonGroup () {
     handlePokemonsGroup()
   }, [])
 
-  async function handlePokemonsGroup () {
+  const handlePokemonsGroup = useCallback(async () => {
     const data = await pokemon.getGroup()
 
     setPokemonGroup(data)
-  }
+  })
 
   return (
     <PokemonGroupContainer>

@@ -1,12 +1,6 @@
-import { IconImgContainer } from './style'
-import React from 'react'
 import PropTypes from 'prop-types'
-
-IconImg.propTypes = {
-  img: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  className: PropTypes.string
-}
+import React from 'react'
+import { IconImgContainer } from './style'
 
 function IconImg ({ img, alt, className }) {
   return (
@@ -16,6 +10,12 @@ function IconImg ({ img, alt, className }) {
       <img data-testid="logo-image-pokeball" src={img} alt={alt} />
     </IconImgContainer>
   )
+}
+
+IconImg.propTypes = {
+  img: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  className: PropTypes.string
 }
 
 export default IconImg
