@@ -40,7 +40,7 @@ function SearchInput () {
   }
 
   function initialFetch () {
-    const randomPokemonId = (Math.random() * 100 + 1).toFixed()
+    const randomPokemonId = (Math.random() * 500 + 1).toFixed()
     handleFetchPokemon(randomPokemonId)
   }
 
